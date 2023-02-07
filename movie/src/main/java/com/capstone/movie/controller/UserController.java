@@ -3,6 +3,8 @@ package com.capstone.movie.controller;
 import com.capstone.movie.model.Users;
 import com.capstone.movie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,6 +40,15 @@ public class UserController {
     @DeleteMapping("/deleteUser/{userId}")
     public String deleteUser(@PathVariable("userId") int userId) {
         return userService.deleteUser(userId);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Users> login(@RequestParam String userName, @RequestParam String password) {
+        Users user = userService.login(userName, password);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
 }
