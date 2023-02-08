@@ -42,13 +42,18 @@ public class UserController {
         return userService.deleteUser(userId);
     }
 
+//    @PostMapping("/login")
+//    public ResponseEntity<Users> login(@RequestParam String userName, @RequestParam String userPassword) {
+//        Users user = userService.login(userName, userPassword);
+//        if (user != null) {
+//            return new ResponseEntity<>(user, HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+//    }
+
     @PostMapping("/login")
-    public ResponseEntity<Users> login(@RequestParam String userName, @RequestParam String password) {
-        Users user = userService.login(userName, password);
-        if (user != null) {
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    public Users login(@RequestBody Users use) {
+        return userService.login(use.getUserName(), use.getUserPassword());
     }
 
 }

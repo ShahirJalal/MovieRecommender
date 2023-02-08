@@ -60,14 +60,12 @@ public class UserRepository {
             return false;
     }
 
-    public Users login(String userName, String password) {
-        String GET_BY_EMAIL_PASSWORD = "SELECT * FROM demo_users WHERE USERNAME = ? AND USERPASSWORD = ?";
+    public Users login(String userName, String userPassword) {
+        String GET_BY_USERNAME_PASSWORD = "SELECT * FROM demo_users WHERE userName = ? AND userPassword = ?";
         try {
-            return jdbcTemplate.queryForObject(GET_BY_EMAIL_PASSWORD, rowMapper, userName, password);
+            return jdbcTemplate.queryForObject(GET_BY_USERNAME_PASSWORD, rowMapper, userName, userPassword);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
-
-
 }

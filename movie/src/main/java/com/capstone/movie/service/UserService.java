@@ -50,8 +50,8 @@ public class UserService {
         return response;
     }
 
-    public Users login(String userName, String password) {
-        return userRepository.login(userName, password);
+    public Users login(String userName, String userPassword) {
+        return userRepository.login(userName, userPassword);
     }
 
 }

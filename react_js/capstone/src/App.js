@@ -11,6 +11,7 @@ import RecommendComponent from './components/RecommendComponent'
 import LoginComponent from './components/LoginComponent';
 import RegisterComponent from './components/RegisterComponent';
 import MovieInfo from './components/MovieInfo';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       <div className="container">
         <Routes>
             <Route path = "/register" element={<RegisterComponent />}></Route>
-            <Route path = "/" element={<LoginComponent />}></Route>
+            <Route path = "/" element={<Login />}></Route>
             {/* <Route path = "/" element={<ListUserComponent/>}></Route> */}
             <Route path = "/users" element={<ListUserComponent/>}></Route>
             <Route path = "/add-User" element={<AddUserComponet/>}></Route>
