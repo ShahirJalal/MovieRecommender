@@ -16,9 +16,9 @@ public  class MovieRepository {
     @Autowired
     private JdbcOperations jdbcTemplate;
 
-    private String InsertQuery = "INSERT INTO demo_movies (title, genres) VALUES (?, ?)";
-    private String UpdateQuery = "UPDATE  movies SET title = ?, genres = ? WHERE movieId = ?";
-    private String DeleteQuery = "DELETE  movies WHERE movieId = ?";
+//    private String InsertQuery = "INSERT INTO demo_movies (title, genres) VALUES (?, ?)";
+//    private String UpdateQuery = "UPDATE  movies SET title = ?, genres = ? WHERE movieId = ?";
+//    private String DeleteQuery = "DELETE  movies WHERE movieId = ?";
     private String InsertPoster = "INSERT INTO movies (email, userName, userPassword) VALUES (?, ?, ?)";
     private String RateMovie = "INSERT INTO ratings (userId, movieId, rating, timeStamp) VALUES (?, ?, ?, ?)";
 
@@ -39,13 +39,15 @@ public  class MovieRepository {
     };
 
     public List<Movies> findAll(){
-//        return jdbcTemplate.query("SELECT M.movieid,M.genres, M.title ,L.IMDBID  FROM Movies M JOIN  LINKS L ON M.movieid=L.movieid  ORDER BY M.movieid DESC FETCH NEXT 100 ROWS ONLY",rowMapper);
-//        return jdbcTemplate.query("SELECT * FROM Movies ORDER BY Movieid ASC FETCH NEXT 100 ROWS ONLY",rowMapper);
         return jdbcTemplate.query("SELECT * FROM FILTERED_Movies ORDER BY movieId ASC FETCH NEXT 100 ROWS ONLY",rowMapper);
     }
+
+    private String InsertQuery = "INSERT INTO demo_movies (title, genres) VALUES (?, ?)";
     public boolean addMovie(Movies movie){
         return jdbcTemplate.update(InsertQuery, movie.getTitle(), movie.getGenres()) > 0;
     }
+
+    private String UpdateQuery = "UPDATE  movies SET title = ?, genres = ? WHERE movieId = ?";
     public boolean updateMovie(int movieId,Movies movie){
         return jdbcTemplate.update(UpdateQuery, movie.getTitle(), movie.getGenres(),movieId) > 0;
     }
@@ -60,6 +62,7 @@ public  class MovieRepository {
         }
     }
 
+    private String DeleteQuery = "DELETE  movies WHERE movieId = ?";
     public boolean deleteMovie(int movieId) {
         if (jdbcTemplate.update(DeleteQuery, movieId) > 0)
             return true;
