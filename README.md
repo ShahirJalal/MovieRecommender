@@ -9,7 +9,7 @@ This project is a web application built using the following tools and technologi
 - Axios
 - Bootstrap
 
-The `movie` folder contains the Spring Boot code and the `react_js` folder contains the React code.
+The `movie` folder contains the Spring Boot code and the `frontend` folder contains the React code.
 
 ## Spring Boot
 Spring Boot is a framework for building Java applications that allows for easy creation of stand-alone, production-grade, and robust applications.
