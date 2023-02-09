@@ -32,7 +32,7 @@ const ListMovieComponent = () => {
       return(
       <div className = "container">
         <br />
-           <h2 className = "text-center"> Movies List </h2> 
+           <h2 className = "text-center"> Movies </h2> 
            <Link to = "/add-Movie" className="btn btn-primary mb-2"> Add New Movie </Link>
            <table className="table table-bordered table-striped">
                 <thead>
