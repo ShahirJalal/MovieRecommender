@@ -67,7 +67,7 @@ return (
         </form>
         <p className="text-center mt-3">
           Don't have an account? &nbsp;
-          <a href="#">Sign up</a>
+          <a href="http://localhost:3000/registration">Sign up</a>
         </p>
       </div>
     </div>

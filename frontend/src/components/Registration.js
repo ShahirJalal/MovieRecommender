@@ -111,7 +111,7 @@ const Registration = () => {
           </form>
           <p className="text-center mt-3">
             Already have an account? &nbsp;
-            <a href="#">Login</a>
+            <a href="http://localhost:3000/login">Login</a>
           </p>
         </div>
       </div>
