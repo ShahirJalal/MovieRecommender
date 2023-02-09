@@ -6,4 +6,8 @@
        background-color: black;
   text-align: center;
   color: white;
- }
+}
+
+.header-text {
+  padding-left: 15px;
+}

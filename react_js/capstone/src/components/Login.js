@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (event) => {
@@ -16,37 +16,63 @@ const Login = () => {
         userPassword,
       });
       if (response.data) {
-        setIsAuthenticated(true);
+        setIsSuccessful(true);
+        setErrorMessage('');
       }
     } catch (error) {
       setErrorMessage('Invalid credentials');
+      setIsSuccessful(false);
     }
   };
 
-  return (
-    <div>
-      {isAuthenticated ? (
-        <Redirect to='/movies' />
-      ) : (
+return (
+  <div className='container mt-5 d-flex justify-content-center'>
+    <div className='card' style={{width: "30%"}}>
+      <div className='card-header'>
+        <h3>Login</h3>
+      </div>
+      <div className='card-body'>
         <form onSubmit={handleSubmit}>
-          <input
-            type='text'
-            placeholder='User Name'
-            value={userName}
-            onChange={(event) => setUserName(event.target.value)}
-          />
-          <input
-            type='password'
-            placeholder='Password'
-            value={userPassword}
-            onChange={(event) => setUserPassword(event.target.value)}
-          />
-          <button type='submit'>Login</button>
-          {errorMessage && <p>{errorMessage}</p>}
+          <div className='form-group mb-2'>
+            <label htmlFor='username'>Username:</label>
+            <input
+              type='text'
+              id='username'
+              className='form-control'
+              placeholder='User Name'
+              value={userName}
+              onChange={(event) => setUserName(event.target.value)}
+            />
+          </div>
+          <div className='form-group mb-2'>
+            <label htmlFor='password'>Password:</label>
+            <input
+              type='password'
+              id='password'
+              className='form-control'
+              placeholder='Password'
+              value={userPassword}
+              onChange={(event) => setUserPassword(event.target.value)}
+            />
+          </div>
+          <button type='submit' className='btn btn-primary mt-2'>
+            Login
+          </button>
+          {isSuccessful && (
+            <p className='text-success mt-3'>Login successful</p>
+          )}
+          {errorMessage && (
+            <p className='text-danger mt-3'>{errorMessage}</p>
+          )}
         </form>
-      )}
+        <p className="text-center mt-3">
+          Don't have an account? &nbsp;
+          <a href="#">Sign up</a>
+        </p>
+      </div>
     </div>
-  );
+  </div>
+);
 };
 
 export default Login;

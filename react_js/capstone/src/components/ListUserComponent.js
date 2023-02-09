@@ -30,7 +30,8 @@ const ListUserComponent = () => {
         const curentPosts=user.slice(firstPostIndex,lastPostIndex)
       return(
       <div className = "container">
-           <h2 className = "text-center"> List Users </h2> 
+        <br />
+           <h2 className = "text-center"> Users </h2> 
            <Link to = "/add-User" className="btn btn-primary mb-2"> Add New User </Link>
            <table className="table table-bordered table-striped">
                <thead>

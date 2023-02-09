@@ -76,8 +76,8 @@ const AddMovieComponet=()=>{
                                         >
                                     </input>
                                 </div>
-                             <button className="btn btn-success" onClick={(e)=>saveOrUpdateMovie(e)}>Save Movie</button>
-                             <Link to="/movies" className='btn btn-danger'>Cancel</Link>
+                                <button className="btn btn-success" onClick={(e)=>saveOrUpdateMovie(e)} style={{ marginRight: '10px' }}>Save Movie</button>
+                                <Link to="/movies" className='btn btn-danger'>Cancel</Link>
                         </form>
                     </div>
               </div>

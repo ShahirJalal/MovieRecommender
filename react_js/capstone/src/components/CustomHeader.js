@@ -6,13 +6,14 @@ const CustomHeader = () => {
             <header>
                 <nav className = "navbar navbar-expand-md navbar-dark bg-dark"> 
                     <div>
-                                   <a href="http://localhost:3000/" className = "navbar-brand"> 
-                                        Movie Application
-                         </a>
+                        <a href="http://localhost:3000/" className = "navbar-brand header-text"> 
+                            Movie Application
+                        </a>
                     </div>
-                             </nav>
-                      </header>
+                </nav>
+            </header>
         </div>
-  )
+    )
 }
+
 export default CustomHeader

@@ -9,7 +9,7 @@ const Pagination=({totalPosts,postsPerpage,setCurrentPage})=>{
     return(
         <div>
             {pages.map((page,index)=>{
-                return <button key={index} onClick={()=>setCurrentPage(page)}>{page}</button>
+                return <button className = "btn btn-secondary btn-sm text-white" style={{border: "1px solid white"}} key={index} onClick={()=>setCurrentPage(page)}>{page}</button>
         })}
         </div>
     );

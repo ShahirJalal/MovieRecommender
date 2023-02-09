@@ -31,7 +31,8 @@ const ListMovieComponent = () => {
         const curentPosts=movie.slice(firstPostIndex,lastPostIndex)
       return(
       <div className = "container">
-           <h2 className = "text-center"> List Movies </h2> 
+        <br />
+           <h2 className = "text-center"> Movies </h2> 
            <Link to = "/add-Movie" className="btn btn-primary mb-2"> Add New Movie </Link>
            <table className="table table-bordered table-striped">
                 <thead>
