@@ -19,11 +19,5 @@ public class BackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-//		Movies mov = new Movies();
-//		mov.setMovieId(121212);
-//		mov.setTitle("CicakMan");
-//		mov.setGenres("Horror");
-//		movieRepository.addMovie(mov);
-
 	}
 }
