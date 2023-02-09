@@ -1,23 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, BrowserRouter as Router, Route, Routes }from 'react-router-dom';
+import CustomFooter from './components/CustomFooter';
+import CustomHeader from './components/CustomHeader';
+import { Link } from 'react-router-dom';
+import ListUserComponent from './components/ListUserComponent';
+import ListMoviesComponent from './components/ListMoviesComponent';
+import AddUserComponet from './components/AddUserComponent';
+import AddMovieComponet from './components/AddMovieComponent';
+import RecommendComponent from './components/RecommendComponent'
+import MovieInfo from './components/MovieInfo';
+import Login from './components/Login';
+import Registration from './components/Registration';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <BrowserRouter>
+      <CustomHeader></CustomHeader>
+      <div className="container">
+        <Routes>
+            <Route path = "/" element={<Login />}></Route>
+            <Route path = "/login" element={<Login />}></Route>
+            <Route path = "/registration" element={<Registration />}></Route>
+            <Route path = "/movies" element={<ListMoviesComponent/>}></Route>
+            <Route path = "/info-movie/:movieId" element={<MovieInfo/>}></Route>
+            <Route path = "/recommendations/:movieId" element={<RecommendComponent/>}></Route>
+
+            <Route path = "/add-Movie" element={<AddMovieComponet/>}></Route>
+            <Route path = "/edit-movie/:movieId" element={<AddMovieComponet/>}></Route>
+            <Route path = "/users" element={<ListUserComponent/>}></Route>
+            <Route path = "/add-User" element={<AddUserComponet/>}></Route>
+            <Route path = "/edit-user/:userId" element={<AddUserComponet/>}></Route>
+        </Routes>
+      </div>
+      <CustomFooter></CustomFooter>
+      </BrowserRouter>
     </div>
   );
 }
