@@ -56,16 +56,6 @@ public class UserService {
         return response;
     }
 
-    public String register(Users user) {
-        String response;
-
-        if (userRepository.register(user))
-            response = "Successfully registered";
-        else
-            response = "Something went wrong. Not registered, please try again";
-        return response;
-    }
-
     public ResponseEntity<?> login(Users user) {
         Users userdata = userRepository.getByUserName (user.getUserName()); //VERIFY IS USER EXISTS
         if(userdata != null)
@@ -84,5 +74,11 @@ public class UserService {
             return new ResponseEntity<>(  "User does not exist!", HttpStatus.BAD_REQUEST);
         }
     }
+
+    public boolean register(Users user) {
+        return userRepository.register(user);
+    }
+
+
 
 }

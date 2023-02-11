@@ -67,9 +67,9 @@ public class UserRepository {
             return false;
     }
 
+    private String InsertQuery="INSERT INTO demo_users (email, userName, userPassword, role) VALUES (?, ?, ?, ?)";
     public boolean register(Users user) {
-        String INSERT_USER = "INSERT INTO demo_users (EMAIL, USERNAME, USERPASSWORD, ROLE) values (?, ?, ?, ?)";
-        return jdbcTemplate.update(INSERT_USER, user.getEmail(), user.getUserName(), user.getUserPassword(), user.getRole()) > 0;
+        return jdbcTemplate.update(InsertQuery, user.getEmail(),user.getUserName(), user.getUserPassword(), user.getRole()) > 0;
     }
 
 }

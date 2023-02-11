@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody Users user) {
+    public boolean register(@RequestBody Users user) {
         return userService.register(user);
     }
 
