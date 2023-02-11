@@ -25,6 +25,11 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
+    @GetMapping("/getByUserName/{userName}")
+    public Users getByUserName(@PathVariable("userName") String userName) {
+        return userService.getByUserName(userName);
+    }
+
     @PostMapping("/addUser")
     public String addUser(@RequestBody Users use) {
         return userService.addUser(use);
@@ -40,23 +45,23 @@ public class UserController {
         return userService.deleteUser(userId);
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<Users> login(@RequestParam String userName, @RequestParam String userPassword) {
-//        Users user = userService.login(userName, userPassword);
-//        if (user != null) {
-//            return new ResponseEntity<>(user, HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-//    }
-
-//    @PostMapping("/login")
-//    public Users login(@RequestBody Users use) {
-//        return userService.login(use.getUserName(), use.getUserPassword());
-//    }
-
     @PostMapping("/login")
-    public Users login(@RequestParam("username") String userName, @RequestParam("password") String userPassword) {
-        return userService.login(userName, userPassword);
+    public String login(@RequestParam("userName") String userName, @RequestParam("userPassword") String userPassword) {
+        Users user = userService.getByUserName(userName);
+        if (user == null || !user.getUserPassword().equals(userPassword)) {
+            return "Invalid username or password";
+        } else {
+            if (user.getRole().equals("admin")) {
+                return "admin";
+            } else {
+                return "user";
+            }
+        }
+    }
+
+    @PostMapping("/register")
+    public String register(@RequestBody Users user) {
+        return userService.register(user);
     }
 
 }

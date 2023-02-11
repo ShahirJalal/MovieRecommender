@@ -20,6 +20,10 @@ public class UserService {
         return userRepository.getUserById(userId);
     }
 
+    public Users getByUserName(String userName) {
+        return userRepository.getByUserName(userName);
+    }
+
     public String addUser(Users use) {
         String response;
 
@@ -50,12 +54,14 @@ public class UserService {
         return response;
     }
 
-//    public Users login(String userName, String userPassword) {
-//        return userRepository.login(userName, userPassword);
-//    }
+    public String register(Users user) {
+        String response;
 
-    public Users login(String userName, String userPassword) {
-        return userRepository.login(userName, userPassword);
+        if (userRepository.register(user))
+            response = "Successfully registered";
+        else
+            response = "Something went wrong. Not registered, please try again";
+        return response;
     }
 
 }
