@@ -25,7 +25,7 @@ function App() {
             <Route path = "/" element={<Login />}></Route>
             <Route path = "/login" element={<Login />}></Route>
             <Route path = "/registration" element={<Registration />}></Route>
-            <Route path= "/home" element={<UserHome />}></Route>
+            <Route path= "/user-home" element={<UserHome />}></Route>
             <Route path = "/user-movies" element={<UserMovies/>}></Route>
             <Route path = "/info-movie/:movieId" element={<MovieInfo/>}></Route>
             <Route path = "/recommendations/:movieId" element={<RecommendComponent/>}></Route>

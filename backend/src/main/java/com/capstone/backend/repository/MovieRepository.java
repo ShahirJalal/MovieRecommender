@@ -56,6 +56,7 @@ public  class MovieRepository {
     }
     public Movies getFilteredMovieById(int movieId){
         try {
+            System.out.println();
             return jdbcTemplate.queryForObject("SELECT * FROM FILTERED_Movies WHERE movieId = ?", new Object[]{movieId}, rowMapper);
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -87,7 +88,7 @@ public  class MovieRepository {
             }
             rs.close();
 
-            // in case shit hits the fan!
+
         } catch (SQLException se) {
             se.printStackTrace();
         } catch (Exception e) {
@@ -114,15 +115,22 @@ public  class MovieRepository {
             List<String> similarIDs = new ArrayList<>(); //SIMILAR LIST ID
             List<Movies> similarMovies = new ArrayList<>();
             String query = "Select movie_id from pearsons_correlations where ID_" + id + "> 0.5";//QUERY TO GET SIMILAR IDs
+            System.out.println("Query made: " + query);
             similarIDs = runQuery(query, "movie_id");
+            System.out.println("Similar IDs: " + similarIDs);
+            System.out.println("Number of movies found: " + similarIDs.size());
             for (int j = 0; j < similarIDs.size(); j++) {
-                Movies movie=getFilteredMovieById(j);
+                Movies movie=getFilteredMovieById(Integer.valueOf(similarIDs.get(j)));
                 if (movie == null) {
+//                    System.out.println("movie null: " + movie.getTitle());
                     continue;
                 } else {
+                    System.out.println("movie found: " + movie.getMovieId());
                     similarMovies.add(movie);
                 }
+//                similarMovies.add(movie);
             }
+            System.out.println("return size: " + similarMovies.size());
             return similarMovies;
         } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();

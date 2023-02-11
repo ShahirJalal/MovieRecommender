@@ -49,9 +49,14 @@ public class UserController {
 //        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 //    }
 
+//    @PostMapping("/login")
+//    public Users login(@RequestBody Users use) {
+//        return userService.login(use.getUserName(), use.getUserPassword());
+//    }
+
     @PostMapping("/login")
-    public Users login(@RequestBody Users use) {
-        return userService.login(use.getUserName(), use.getUserPassword());
+    public Users login(@RequestParam("username") String userName, @RequestParam("password") String userPassword) {
+        return userService.login(userName, userPassword);
     }
 
 }

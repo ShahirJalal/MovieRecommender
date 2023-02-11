@@ -60,10 +60,26 @@ public class UserRepository {
             return false;
     }
 
+//    public Users login(String userName, String userPassword) {
+//        String GET_BY_USERNAME_PASSWORD = "SELECT * FROM demo_users WHERE userName = ? AND userPassword = ?";
+//        try {
+//            return jdbcTemplate.queryForObject(GET_BY_USERNAME_PASSWORD, rowMapper, userName, userPassword);
+//        } catch (EmptyResultDataAccessException e) {
+//            return null;
+//        }
+//    }
+
     public Users login(String userName, String userPassword) {
-        String GET_BY_USERNAME_PASSWORD = "SELECT * FROM demo_users WHERE userName = ? AND userPassword = ?";
+        String query = "SELECT * FROM demo_users WHERE USERNAME = ? AND USERPASSWORD = ?";
         try {
-            return jdbcTemplate.queryForObject(GET_BY_USERNAME_PASSWORD, rowMapper, userName, userPassword);
+            Users user = jdbcTemplate.queryForObject(query, new Object[]{userName, userPassword}, rowMapper);
+            if (user != null) {
+                user.setRole(jdbcTemplate.queryForObject("SELECT ROLE FROM demo_users WHERE USERNAME = ? AND USERPASSWORD = ?",
+                        new Object[]{userName, userPassword}, String.class));
+                return user;
+            } else {
+                return null;
+            }
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
