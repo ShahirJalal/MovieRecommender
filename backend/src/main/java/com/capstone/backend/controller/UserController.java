@@ -3,6 +3,8 @@ package com.capstone.backend.controller;
 import com.capstone.backend.model.Users;
 import com.capstone.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,16 +48,16 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("userName") String userName, @RequestParam("userPassword") String userPassword) {
-        Users user = userService.getByUserName(userName);
-        if (user == null || !user.getUserPassword().equals(userPassword)) {
-            return "Invalid username or password";
-        } else {
-            if (user.getRole().equals("admin")) {
-                return "admin";
+    public ResponseEntity<?> login(@RequestBody Users user) {
+        Users userdata = userService.getByUserName(user.getUserName()); //VERIFY IS USER EXISTS
+        if(userdata != null) {
+            if(user.getUserPassword().equals(userdata.getUserPassword())) {
+                return new ResponseEntity<Users>(userdata, HttpStatus.OK);
             } else {
-                return "user";
+                return new ResponseEntity<>("Wrong Password", HttpStatus.BAD_REQUEST);
             }
+        } else {
+            return new ResponseEntity<>("User does not exist!", HttpStatus.BAD_REQUEST);
         }
     }
 

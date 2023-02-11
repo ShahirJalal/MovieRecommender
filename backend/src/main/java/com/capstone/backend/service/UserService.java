@@ -3,6 +3,8 @@ package com.capstone.backend.service;
 import com.capstone.backend.model.Users;
 import com.capstone.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,6 +64,25 @@ public class UserService {
         else
             response = "Something went wrong. Not registered, please try again";
         return response;
+    }
+
+    public ResponseEntity<?> login(Users user) {
+        Users userdata = userRepository.getByUserName (user.getUserName()); //VERIFY IS USER EXISTS
+        if(userdata != null)
+        {
+            if(user.getUserPassword ().equals(userdata.getUserPassword ()))
+            {
+                return new ResponseEntity<Users> (userdata, HttpStatus.OK);
+            }
+            else
+            {
+                return new ResponseEntity<> ("Wrong Password", HttpStatus.BAD_REQUEST);
+            }
+        }
+        else
+        {
+            return new ResponseEntity<>(  "User does not exist!", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
