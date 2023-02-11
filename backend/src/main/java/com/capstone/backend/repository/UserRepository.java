@@ -27,6 +27,7 @@ public class UserRepository {
         use.setEmail(rs.getString(2));
         use.setUserName(rs.getString(3));
         use.setUserPassword(rs.getString(4));
+        use.setRole(rs.getString(5));
         return use;
     };
 
