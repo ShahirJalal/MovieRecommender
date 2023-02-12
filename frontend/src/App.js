@@ -14,6 +14,7 @@ import Registration from './components/Registration';
 import UserHome from './components/UserHome';
 import UserMovies from './components/UserMovies';
 import AdminHome from './components/AdminHome';
+import FavouritesList from './components/FavouritesList';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path = "/recommendations/:movieId" element={<RecommendComponent/>}></Route>
 
             <Route path= "/admin-home" element={<AdminHome />}></Route>
+            <Route path= "/favourites" element={<FavouritesList />}></Route>
             <Route path = "/admin-movies" element={<ListMoviesComponent/>}></Route>
             <Route path = "/add-Movie" element={<AddMovieComponet/>}></Route>
             <Route path = "/edit-movie/:movieId" element={<AddMovieComponet/>}></Route>
