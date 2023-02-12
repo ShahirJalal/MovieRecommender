@@ -1,5 +1,3 @@
-// this is the ListMoviesComponent.js modified code with added favourite button
-
 import React, {useState,useEffect} from 'react'
 import MovieService from '../services/MovieService'
 import Pagination from './Pagination'
