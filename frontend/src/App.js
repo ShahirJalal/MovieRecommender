@@ -17,31 +17,45 @@ import AdminHome from './components/AdminHome';
 import FavouritesList from './components/FavouritesList';
 
 function App() {
-  return (
-    <div >
-      <BrowserRouter>
-      <CustomHeader></CustomHeader>
-      <div className="container">
-        <Routes>
-            <Route path = "/" element={<Login />}></Route> {/*settle*/}
-            <Route path = "/login" element={<Login />}></Route> {/*settle*/}
-            <Route path = "/registration" element={<Registration />}></Route> {/*settle*/}
-            <Route path= "/user-home" element={<UserHome />}></Route>
-            <Route path = "/user-movies" element={<UserMovies/>}></Route>
-            <Route path = "/info-movie/:movieId" element={<MovieInfo/>}></Route>
-            <Route path = "/recommendations/:movieId" element={<RecommendComponent/>}></Route>
+  const role = localStorage.getItem("role");
 
-            <Route path= "/admin-home" element={<AdminHome />}></Route>
-            <Route path= "/favourites" element={<FavouritesList />}></Route>
-            <Route path = "/admin-movies" element={<ListMoviesComponent/>}></Route>
-            <Route path = "/add-Movie" element={<AddMovieComponet/>}></Route>
-            <Route path = "/edit-movie/:movieId" element={<AddMovieComponet/>}></Route>
-            <Route path = "/users" element={<ListUserComponent/>}></Route>
-            <Route path = "/add-User" element={<AddUserComponet/>}></Route>
-            <Route path = "/edit-user/:userId" element={<AddUserComponet/>}></Route>
-        </Routes>
-      </div>
-      <CustomFooter></CustomFooter>
+  return (
+    <div>
+      <BrowserRouter>
+        <CustomHeader />
+        <div className="container">
+          <Routes>
+            {!role && (
+              <Route path="/" element={<Login />} />
+            )}
+            <Route path="/login" element={<Login />} />
+            <Route path="/registration" element={<Registration />} />
+
+            {role === "user" && (
+              <>
+                <Route path="/user-home" element={<UserHome />} />
+                <Route path="/user-movies" element={<UserMovies />} />
+                <Route path="/info-movie/:movieId" element={<MovieInfo />} />
+                <Route path="/recommendations/:movieId" element={<RecommendComponent />} />
+                <Route path="/favourites" element={<FavouritesList />} />
+              </>
+            )}
+
+            {role === "admin" && (
+              <>
+                <Route path="/admin-home" element={<AdminHome />} />
+                <Route path="/admin-movies" element={<ListMoviesComponent />} />
+                <Route path="/add-Movie" element={<AddMovieComponet />} />
+                <Route path="/edit-movie/:movieId" element={<AddMovieComponet />} />
+                <Route path="/users" element={<ListUserComponent />} />
+                <Route path="/add-User" element={<AddUserComponet />} />
+                <Route path="/edit-user/:userId" element={<AddUserComponet />} />
+                <Route path="/favourites" element={<FavouritesList />} />
+              </>
+            )}
+          </Routes>
+        </div>
+        <CustomFooter />
       </BrowserRouter>
     </div>
   );
