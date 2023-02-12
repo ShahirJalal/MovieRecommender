@@ -1,3 +1,5 @@
+// this is the ListMoviesComponent.js original code
+
 import React, {useState,useEffect} from 'react'
 import MovieService from '../services/MovieService'
 import Pagination from './Pagination'

@@ -1,8 +1,11 @@
+// this is the ListMoviesComponent.js modified code with added favourite button
+
 import React, {useState,useEffect} from 'react'
 import MovieService from '../services/MovieService'
 import Pagination from './Pagination'
 import { Link } from 'react-router-dom'
 import MoviePoster from './MoviePoster'
+import FavouriteService from '../services/FavouriteService'
 
 const ListMovieComponent = () => {
       const [movie, setMovie] = useState([]);
@@ -26,6 +29,22 @@ const ListMovieComponent = () => {
                     console.log(error);
                 })
             }
+
+            const addToFavourites = (movieId, title, genres) => {
+                const favourite = {
+                  movieId: movieId,
+                  title: title,
+                  genres: genres,
+                  userId: 2
+                };
+              
+                FavouriteService.addFavourite(favourite).then((response) => {
+                  console.log(response);
+                }).catch(error => {
+                  console.log(error);
+                });
+              };
+              
          const lastPostIndex = currentPage*postsPerPage;
         const firstPostIndex = lastPostIndex - postsPerPage;
         const curentPosts=movie.slice(firstPostIndex,lastPostIndex)
@@ -58,6 +77,11 @@ const ListMovieComponent = () => {
                                 <button className='btn btn-danger' onClick={()=>deleteMovie(movie.movieId)} 
                                 style={{marginLeft:"10px", marginRight: "10px"}}>Delete</button>
                                 <Link className='btn btn-success' to={`/recommendations/${movie.movieId}`}>Recommendation</Link>
+                                <button className='btn btn-primary' 
+                                    style={{marginLeft:"10px"}} 
+                                    onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}>
+                                    Add to Favourites
+                                </button>
                             </td>                      
                             </tr>
                     )

@@ -1,3 +1,5 @@
+// this is the ListMoviesComponent.js modified code with added recommendation button
+
 import React, {useState,useEffect} from 'react'
 import MovieService from '../services/MovieService'
 import Pagination from './Pagination'
