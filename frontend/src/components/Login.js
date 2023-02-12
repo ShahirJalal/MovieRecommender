@@ -29,6 +29,13 @@ const Login = () => {
       });
   };
 
+  const role = localStorage.getItem("role");
+  if (role === "user") {
+    window.location.href = "http://localhost:3000/user-home";
+  } else if (role === "admin") {
+    window.location.href = "http://localhost:3000/admin-home";
+  }
+
   return (
     <div className="container mt-5 d-flex justify-content-center">
       <div className="card" style={{ width: "30%" }}>
