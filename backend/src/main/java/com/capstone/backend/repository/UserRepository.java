@@ -17,7 +17,7 @@ public class UserRepository {
 
     private final String GET_ALL = "SELECT * FROM demo_users";
     private final String GET_BY_ID = "SELECT * FROM demo_users WHERE USERID = ?";
-    private final String INSERT_USER = "INSERT INTO demo_users (USERID, EMAIL, USERNAME, USERPASSWORD) values (?, ?, ?, ?)";
+    private final String INSERT_USER = "INSERT INTO demo_users (USERID, EMAIL, USERNAME, USERPASSWORD, ROLE) values (?, ?, ?, ?, ?)";
     private final String UPDATE_USER = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ? WHERE USERID = ?";
     private final String DELETE_USER = "DELETE demo_users WHERE USERID = ?";
 
@@ -25,9 +25,9 @@ public class UserRepository {
         Users use = new Users();
         use.setUserId(rs.getInt(1));
         use.setEmail(rs.getString(2));
-        use.setUserName(rs.getString(3));
-        use.setUserPassword(rs.getString(4));
-        use.setRole(rs.getString(5));
+        use.setRole(rs.getString(3));
+        use.setUserName(rs.getString(4));
+        use.setUserPassword(rs.getString(5));
         return use;
     };
 
@@ -47,14 +47,14 @@ public class UserRepository {
 
 
     public boolean addUser(Users u) {
-        if (jdbcTemplate.update(INSERT_USER, u.getUserId(), u.getEmail(), u.getUserName(), u.getUserPassword()) > 0)
+        if (jdbcTemplate.update(INSERT_USER, u.getUserId(), u.getEmail(), u.getUserName(), u.getUserPassword(), u.getRole()) > 0)
             return true;
         else
             return false;
     }
 
     public boolean updateUser(int userId, Users u) {
-        if (jdbcTemplate.update(UPDATE_USER, u.getEmail(), u.getUserName(), u.getUserPassword(), u.getUserId()) > 0)
+        if (jdbcTemplate.update(UPDATE_USER, u.getEmail(), u.getUserName(), u.getUserPassword(), u.getRole(), u.getUserId()) > 0)
             return true;
         else
             return false;
