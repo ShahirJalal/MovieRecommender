@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 const CustomHeader = () => {
     const handleLogout = () => {
+        localStorage.clear();
         setTimeout(() => {
             window.location.href = "/login";
         }, 1500);

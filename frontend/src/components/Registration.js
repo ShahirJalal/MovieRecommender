@@ -1,42 +1,57 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Registration = () => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("user");
   const [isSuccessful, setIsSuccessful] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (userPassword !== confirmPassword) {
-      setErrorMessage('Passwords do not match');
+      setErrorMessage("Passwords do not match");
       setIsSuccessful(false);
       return;
     }
     try {
-      const response = await axios.post('http://localhost:8080/api/v1/users/register', {
-        email,
-        userName,
-        userPassword,
-        role,
-      });
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/users/register",
+        {
+          email,
+          userName,
+          userPassword,
+          role,
+        }
+      );
       if (response.data) {
         setIsSuccessful(true);
-        setErrorMessage('');
-        setTimeout(() => {
-          window.location.href = 'http://localhost:3000/login';
-        }, 3000);        
+        setErrorMessage("");
+        localStorage.setItem("role", role);
+        if (role === "user") {
+          window.location.href = "http://localhost:3000/user-home";
+        } else {
+          window.location.href = "http://localhost:3000/admin-home";
+        }
       }
     } catch (error) {
-      setErrorMessage('Error registering user');
+      setErrorMessage("Error registering user");
       setIsSuccessful(false);
     }
   };
+
+  const roleFromLocalStorage = localStorage.getItem("role");
+  if (roleFromLocalStorage) {
+    if (roleFromLocalStorage === "user") {
+      window.location.href = "http://localhost:3000/user-home";
+    } else {
+      window.location.href = "http://localhost:3000/admin-home";
+    }
+  }
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
@@ -108,18 +123,16 @@ const Registration = () => {
             {isSuccessful && (
               <p className="text-success mt-3">Registration successful</p>
             )}
-            {errorMessage && (
-              <p className="text-danger mt-3">{errorMessage}</p>
-            )}
+            {errorMessage && <p className="text-danger mt-3">{errorMessage}</p>}
           </form>
           <p className="text-center mt-3">
-            Already have an account?&nbsp;
+            Already have an account?
             <a href="http://localhost:3000/login">Login</a>
           </p>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Registration;

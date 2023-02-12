@@ -6,21 +6,27 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     axios
       .post("http://localhost:8080/api/v1/users/login", {
         userName: username,
-        userPassword: password
+        userPassword: password,
       })
-      .then(res => {
+      .then((res) => {
         if (res.data.role === "user") {
+          localStorage.setItem("userId", res.data.userId);
+          localStorage.setItem("userName", res.data.userName);
+          localStorage.setItem("role", "user");
           window.location.href = "http://localhost:3000/user-home";
         } else if (res.data.role === "admin") {
+          localStorage.setItem("userId", res.data.userId);
+          localStorage.setItem("userName", res.data.userName);
+          localStorage.setItem("role", "admin");
           window.location.href = "http://localhost:3000/admin-home";
         }
       })
-      .catch(err => {
+      .catch((err) => {
         setError("Wrong username or password. Please try again.");
         console.error(err);
       });
@@ -47,7 +53,7 @@ const Login = () => {
               id="username"
               placeholder="Username"
               value={username}
-              onChange={e => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <input
               type="password"
@@ -55,14 +61,12 @@ const Login = () => {
               id="password"
               placeholder="Password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button type="submit" className="btn btn-primary mt-2">
               Login
             </button>
-            {error && (
-              <p className="text-danger mt-3">{error}</p>
-            )}
+            {error && <p className="text-danger mt-3">{error}</p>}
           </form>
           <p className="text-center mt-3">
             Don't have an account?&nbsp;
