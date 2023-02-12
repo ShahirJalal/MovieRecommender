@@ -20,7 +20,7 @@ const CustomHeader = () => {
                     <div className="collapse navbar-collapse">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <Link to="/home" className="nav-link">Home</Link>
+                                <Link to="/user-home" className="nav-link">Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="#" onClick={handleLogout} className="nav-link">Logout</Link>

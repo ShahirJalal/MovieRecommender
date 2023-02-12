@@ -16,11 +16,11 @@ public class Favourites {
     @Column(name = "favouriteid")
     private int favouriteId;
     @Column(name = "movieid")
-    private String movieId;
+    private int movieId;
     @Column(name = "title")
     private String title;
     @Column(name = "genres")
     private String genres;
     @Column(name = "userid")
-    private String userId;
+    private int userId;
 }
