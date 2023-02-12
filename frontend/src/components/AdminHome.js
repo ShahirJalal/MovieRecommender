@@ -37,3 +37,11 @@ const AdminHome = () => {
 };
 
 export default AdminHome;
+
+// edit this code so that it will check the local storage. if the local storage is empty, send the user to this page: http://localhost:3000/login.
+
+// if the role of the person is admin, send the person to this page:
+// let the person stay on the current page
+
+// if the role of the person is user, send the person to this page:
+// http://localhost:3000/user-home

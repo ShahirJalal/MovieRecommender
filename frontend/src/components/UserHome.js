@@ -19,7 +19,9 @@ const UserHome = () => {
       </div>
       <div className="row my-5">
         <div className="col-12 d-flex justify-content-center">
-          <button className="btn btn-secondary">My Favourites</button>
+          <Link to="/favourites">
+            <button className="btn btn-secondary">My Favourites</button>
+          </Link>
         </div>
       </div>
     </div>

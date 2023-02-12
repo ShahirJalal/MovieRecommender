@@ -3,6 +3,7 @@ import MovieService from '../services/MovieService'
 import Pagination from './Pagination'
 import MoviePoster from './MoviePoster'
 import { Link } from 'react-router-dom'
+import FavouriteService from '../services/FavouriteService'
 
 const UserMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -21,6 +22,26 @@ const UserMovies = () => {
       console.log(error);
     })
   }
+
+  const addToFavourites = (movieId, title, genres) => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      const favourite = {
+        movieId: movieId,
+        title: title,
+        genres: genres,
+        userId: userId
+      };
+
+      FavouriteService.addFavourite(favourite).then((response) => {
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
+      });
+    } else {
+      alert("Please log in first to add to favourites.");
+    }
+  };
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
@@ -49,6 +70,9 @@ const UserMovies = () => {
                   <td>{movie.genres}</td>
                   <td>
                     <Link className='btn btn-success' to={`/recommendations/${movie.movieId}`}>Recommendation</Link>
+                    <button className='btn btn-primary' style={{ marginLeft: "10px" }} onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}>
+                      Add to Favourites
+                    </button>
                   </td>
                 </tr>
             )

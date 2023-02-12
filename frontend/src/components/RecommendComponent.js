@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import MoviePoster from './MoviePoster';
-import { Link } from 'react-router-dom';
+import FavouriteService from '../services/FavouriteService';
 
 const RecommendComponent = () => {
   const [movies, setMovies] = useState([]);
@@ -16,33 +16,54 @@ const RecommendComponent = () => {
     fetchData();
   }, [movieId]);
 
+  const addToFavourites = (movieId, title, genres) => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      const favourite = {
+        movieId: movieId,
+        title: title,
+        genres: genres,
+        userId: userId
+      };
+      FavouriteService.addFavourite(favourite)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else {
+      alert("Please log in first to add to favourites.");
+    }
+  };
+
   return (
-    <div className = "container"><br />
-      <h2 className='text-center'> Recommended Movies</h2><br />
-    <table className="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th> Movie Id </th>
-          <th> Poster </th>
-          <th> Title </th> 
-          <th> Genres </th> 
-          <th> Function </th> 
-        </tr>
-      </thead>
-      <tbody>
-        {movies.map((movie) => (
-          <tr key={movie.movieId}>
-            <td>{movie.movieId}</td>
-            <td><MoviePoster movieId={movie.movieId}/></td>
-            <td>{movie.title}</td>
-            <td>{movie.genres}</td>
-            <td>
-                <Link className='btn btn-success' to={`/recommendations/${movie.movieId}`}>Add To Favourite</Link>
-            </td>
+    <div className="container">
+      <br />
+      <h2 className='text-center'>Recommended Movies</h2>
+      <br />
+      <table className="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Poster</th>
+            <th>Title</th>
+            <th>Genres</th>
+            <th>Function</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {movies.map((movie) => (
+            <tr key={movie.movieId}>
+              <td><MoviePoster movieId={movie.movieId} /></td>
+              <td>{movie.title}</td>
+              <td>{movie.genres}</td>
+              <td>
+                <button className='btn btn-success' onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}>Add To Favourite</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

@@ -10,7 +10,7 @@ const FavouritesList = () => {
     }, [])
 
     const getFavourites = () => {
-        FavouriteService.getAll().then((response) => {
+        FavouriteService.getFavouriteById(localStorage.getItem("userId")).then((response) => {
             setFavourites(response.data)
         }).catch(error => {
             console.log(error);
@@ -24,12 +24,9 @@ const FavouritesList = () => {
             <table className="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Favourite Id</th>
-                        <th>Movie Id</th>
                         <th>Poster</th>
                         <th>Title</th>
                         <th>Genres</th>
-                        <th>User Id</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,12 +34,9 @@ const FavouritesList = () => {
                         favourites.map(
                             favourite =>
                                 <tr key={favourite.favouriteId}>
-                                    <td>{favourite.favouriteId}</td>
-                                    <td>{favourite.movieId}</td>
                                     <td><MoviePoster movieId={favourite.movieId}/></td>
                                     <td>{favourite.title}</td>
                                     <td>{favourite.genres}</td>
-                                    <td>{favourite.userId}</td>
                                 </tr>
                         )
                     }

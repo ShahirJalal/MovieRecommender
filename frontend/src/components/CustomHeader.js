@@ -36,9 +36,15 @@ const CustomHeader = () => {
             {role && (
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to="/user-home" className="nav-link">
-                    Home
-                  </Link>
+                  {role === "user" ? (
+                    <Link to="/user-home" className="nav-link">
+                      Home
+                    </Link>
+                  ) : (
+                    <Link to="/admin-home" className="nav-link">
+                      Home
+                    </Link>
+                  )}
                 </li>
                 <li className="nav-item">
                   <Link to="#" onClick={handleLogout} className="nav-link">
