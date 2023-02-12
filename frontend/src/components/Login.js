@@ -14,6 +14,9 @@ const Login = () => {
         userPassword: password
       })
       .then(res => {
+        localStorage.setItem("userName", res.data.userName);
+        localStorage.setItem("userId", res.data.userId);
+        localStorage.setItem("role", res.data.role);
         if (res.data.role === "user") {
           window.location.href = "http://localhost:3000/user-home";
         } else if (res.data.role === "admin") {
@@ -64,7 +67,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default Login;
