@@ -23,9 +23,9 @@ function App() {
       <CustomHeader></CustomHeader>
       <div className="container">
         <Routes>
-            <Route path = "/" element={<Login />}></Route>
-            <Route path = "/login" element={<Login />}></Route>
-            <Route path = "/registration" element={<Registration />}></Route>
+            <Route path = "/" element={<Login />}></Route> {/*settle*/}
+            <Route path = "/login" element={<Login />}></Route> {/*settle*/}
+            <Route path = "/registration" element={<Registration />}></Route> {/*settle*/}
             <Route path= "/user-home" element={<UserHome />}></Route>
             <Route path = "/user-movies" element={<UserMovies/>}></Route>
             <Route path = "/info-movie/:movieId" element={<MovieInfo/>}></Route>
