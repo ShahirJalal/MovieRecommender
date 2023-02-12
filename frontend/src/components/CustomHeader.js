@@ -2,6 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const CustomHeader = () => {
+    const handleLogout = () => {
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 1500);
+    };
+
     return(
         <div>
             <header>
@@ -15,6 +21,9 @@ const CustomHeader = () => {
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
                                 <Link to="/home" className="nav-link">Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="#" onClick={handleLogout} className="nav-link">Logout</Link>
                             </li>
                         </ul>
                     </div>
