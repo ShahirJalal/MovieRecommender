@@ -3,15 +3,10 @@ import { Link } from 'react-router-dom'
 
 const CustomHeader = () => {
     const handleLogout = () => {
-        localStorage.clear();
         setTimeout(() => {
             window.location.href = "/login";
         }, 1500);
     };
-
-    const role = localStorage.getItem("role");
-    const userName = localStorage.getItem("userName");
-    const capitalizedUserName = userName.charAt(0).toUpperCase() + userName.slice(1);
 
     return(
         <div>
@@ -19,26 +14,19 @@ const CustomHeader = () => {
                 <nav className = "navbar navbar-expand-md navbar-dark bg-dark"> 
                     <div>
                         <a href="http://localhost:3000/" className = "navbar-brand header-text"> 
-                            <img src="https://raw.githubusercontent.com/ShahirJalal/ReferencePoint/a8fbc0f807b8dd8fc16dca0cb14c59084b0d6bf1/images/filmfrenzy-low-resolution-logo-color-on-transparent-background.svg" alt="Movie Application Logo" height="30" style={{marginRight: "10px"}} />
+                            Movie Application
                         </a>
                     </div>
-                    {(role === "user" || role === "admin") && (
-                        <div className="navbar-brand header-text">
-                            Hello {capitalizedUserName}
-                        </div>
-                    )}
-                    {(role === "user" || role === "admin") && (
-                        <div className="collapse navbar-collapse">
-                            <ul className="navbar-nav ml-auto">
-                                <li className="nav-item">
-                                    <Link to="/user-home" className="nav-link">Home</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="#" onClick={handleLogout} className="nav-link">Logout</Link>
-                                </li>
-                            </ul>
-                        </div>
-                    )}
+                    <div className="collapse navbar-collapse">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <Link to="/user-home" className="nav-link">Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="#" onClick={handleLogout} className="nav-link">Logout</Link>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
             </header>
         </div>
