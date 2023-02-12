@@ -17,9 +17,9 @@ public class UserRepository {
 
     private final String GET_ALL = "SELECT * FROM demo_users";
     private final String GET_BY_ID = "SELECT * FROM demo_users WHERE USERID = ?";
-    private final String INSERT_MOVIE = "INSERT INTO demo_users (USERID, EMAIL, USERNAME, USERPASSWORD) values (?, ?, ?, ?)";
-    private final String UPDATE_MOVIE = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ? WHERE USERID = ?";
-    private final String DELETE_MOVIE = "DELETE demo_users WHERE USERID = ?";
+    private final String INSERT_USER = "INSERT INTO demo_users (USERID, EMAIL, USERNAME, USERPASSWORD) values (?, ?, ?, ?)";
+    private final String UPDATE_USER = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ? WHERE USERID = ?";
+    private final String DELETE_USER = "DELETE demo_users WHERE USERID = ?";
 
     private RowMapper<Users> rowMapper = (ResultSet rs, int rowNum) -> {
         Users use = new Users();
@@ -47,21 +47,21 @@ public class UserRepository {
 
 
     public boolean addUser(Users u) {
-        if (jdbcTemplate.update(INSERT_MOVIE, u.getUserId(), u.getEmail(), u.getUserName(), u.getUserPassword()) > 0)
+        if (jdbcTemplate.update(INSERT_USER, u.getUserId(), u.getEmail(), u.getUserName(), u.getUserPassword()) > 0)
             return true;
         else
             return false;
     }
 
     public boolean updateUser(int userId, Users u) {
-        if (jdbcTemplate.update(UPDATE_MOVIE, u.getEmail(), u.getUserName(), u.getUserPassword(), u.getUserId()) > 0)
+        if (jdbcTemplate.update(UPDATE_USER, u.getEmail(), u.getUserName(), u.getUserPassword(), u.getUserId()) > 0)
             return true;
         else
             return false;
     }
 
     public boolean deleteUser(int userId) {
-        if (jdbcTemplate.update(DELETE_MOVIE, userId) > 0)
+        if (jdbcTemplate.update(DELETE_USER, userId) > 0)
             return true;
         else
             return false;
