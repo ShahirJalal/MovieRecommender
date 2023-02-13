@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 const AdminHome = () => {
   return (
-    <div className="container my-5">
-      <div className="card p-5">
-        <div className="card-header text-center">
-          <h1 className="text-center">Welcome to the Movie Application</h1>
+    <div className="container my-5 d-flex justify-content-center">
+      <div className="card" style={{ width: "50%" }}>
+        <div className="card-header">
+          <h3 className="text-center">Movie Recommender System</h3>
         </div>
         <div className="card-body">
           <p className="text-center">Please select an option below:</p>

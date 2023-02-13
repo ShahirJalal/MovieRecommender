@@ -31,25 +31,22 @@ const Registration = () => {
       if (response.data) {
         setIsSuccessful(true);
         setErrorMessage("");
-        localStorage.setItem("role", role);
-        if (role === "user") {
-          window.location.href = "http://localhost:3000/user-home";
-        } else {
-          window.location.href = "http://localhost:3000/admin-home";
-        }
+        window.location.href = "http://localhost:3000/login";
       }
     } catch (error) {
       setErrorMessage("Error registering user");
       setIsSuccessful(false);
     }
-  };
+  };  
 
   const roleFromLocalStorage = localStorage.getItem("role");
   if (roleFromLocalStorage) {
     if (roleFromLocalStorage === "user") {
       window.location.href = "http://localhost:3000/user-home";
-    } else {
+    } else if (roleFromLocalStorage === "admin") {
       window.location.href = "http://localhost:3000/admin-home";
+    } else {
+      window.location.href = "http://localhost:3000/login";
     }
   }
 
@@ -126,7 +123,7 @@ const Registration = () => {
             {errorMessage && <p className="text-danger mt-3">{errorMessage}</p>}
           </form>
           <p className="text-center mt-3">
-            Already have an account?
+            Already have an account?&nbsp;
             <a href="http://localhost:3000/login">Login</a>
           </p>
         </div>
