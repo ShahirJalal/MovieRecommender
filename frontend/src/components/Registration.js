@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { hashPassword } from './passwordUtils';
 
 const Registration = () => {
   const [userName, setUserName] = useState("");
@@ -19,12 +20,13 @@ const Registration = () => {
       return;
     }
     try {
+      const hashedPassword = await hashPassword(userPassword);
       const response = await axios.post(
         "http://localhost:8080/api/v1/users/register",
         {
           email,
           userName,
-          userPassword,
+          userPassword: hashPassword,
           role,
         }
       );
