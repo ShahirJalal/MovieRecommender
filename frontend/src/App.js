@@ -15,6 +15,7 @@ import UserHome from './components/UserHome';
 import UserMovies from './components/UserMovies';
 import AdminHome from './components/AdminHome';
 import FavouritesList from './components/FavouritesList';
+import React from 'react';
 
 function App() {
   return (

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import MovieService from '../services/MovieService'
+import React from 'react';
 
 
 const useMoviePoster = (movieId) => {
