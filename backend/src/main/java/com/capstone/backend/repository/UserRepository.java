@@ -18,7 +18,7 @@ public class UserRepository {
     private final String GET_ALL = "SELECT * FROM demo_users ORDER BY userId";
     private final String GET_BY_ID = "SELECT * FROM demo_users WHERE USERID = ?";
     private final String INSERT_USER = "INSERT INTO demo_users (USERID, EMAIL, USERNAME, USERPASSWORD, ROLE) values (?, ?, ?, ?, ?)";
-    private final String UPDATE_USER = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ? WHERE USERID = ?";
+    private final String UPDATE_USER = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ?, ROLE = ? WHERE USERID = ?";
     private final String DELETE_USER = "DELETE demo_users WHERE USERID = ?";
 
     private RowMapper<Users> rowMapper = (ResultSet rs, int rowNum) -> {

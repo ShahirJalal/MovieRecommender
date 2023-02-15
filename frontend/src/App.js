@@ -5,8 +5,8 @@ import CustomHeader from './components/CustomHeader';
 // import { Link } from 'react-router-dom';
 import ListUserComponent from './components/ListUserComponent';
 import ListMoviesComponent from './components/ListMoviesComponent';
-import AddUserComponet from './components/AddUserComponent';
-import AddMovieComponet from './components/AddMovieComponent';
+import AddUserComponent from './components/AddUserComponent';
+import AddMovieComponent from './components/AddMovieComponent';
 import RecommendComponent from './components/RecommendComponent'
 import MovieInfo from './components/MovieInfo';
 import Login from './components/Login';
@@ -35,11 +35,11 @@ function App() {
             <Route path= "/admin-home" element={<AdminHome />}></Route>
             <Route path= "/favourites" element={<FavouritesList />}></Route>
             <Route path = "/admin-movies" element={<ListMoviesComponent/>}></Route>
-            <Route path = "/add-Movie" element={<AddMovieComponet/>}></Route>
-            <Route path = "/edit-movie/:movieId" element={<AddMovieComponet/>}></Route>
+            <Route path = "/add-Movie" element={<AddMovieComponent/>}></Route>
+            <Route path = "/edit-movie/:movieId" element={<AddMovieComponent/>}></Route>
             <Route path = "/users" element={<ListUserComponent/>}></Route>
-            <Route path = "/add-User" element={<AddUserComponet/>}></Route>
-            <Route path = "/edit-user/:userId" element={<AddUserComponet/>}></Route>
+            <Route path = "/add-User" element={<AddUserComponent/>}></Route>
+            <Route path = "/edit-user/:userId" element={<AddUserComponent/>}></Route>
         </Routes>
       </div>
       <CustomFooter></CustomFooter>

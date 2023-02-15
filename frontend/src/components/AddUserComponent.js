@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import UserService from '../services/UserService'
 import {Link, useNavigate, useParams }from 'react-router-dom'
-const AddUserComponet=()=>{
+const AddUserComponent=()=>{
     const [email, setEmail] = useState('')
     const [userName, setUserName] = useState('')
     const [userPassword, setUserPassword] = useState('')
@@ -102,4 +102,4 @@ const AddUserComponet=()=>{
 </div>
     )
 }
-export default AddUserComponet
+export default AddUserComponent

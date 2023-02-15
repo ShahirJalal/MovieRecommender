@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import MovieService from '../services/MovieService'
 import {Link, useNavigate,useParams }from 'react-router-dom'
-const AddMovieComponet=()=>{
+const AddMovieComponent=()=>{
     const [title, setTitle] = useState('')
     const [genres, setGenres] = useState('')
     const navigate=useNavigate();
@@ -86,4 +86,4 @@ const AddMovieComponet=()=>{
 </div>
     )
 }
-export default AddMovieComponet
+export default AddMovieComponent
