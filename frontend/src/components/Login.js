@@ -1,36 +1,36 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { hashPassword } from './passwordUtils';
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:8080/api/v1/users/login", {
+    try {
+      const hashedPassword = await hashPassword(password);
+      const response = await axios.post("http://localhost:8080/api/v1/users/login", {
         userName: username,
-        userPassword: password,
-      })
-      .then((res) => {
-        if (res.data.role === "user") {
-          localStorage.setItem("userId", res.data.userId);
-          localStorage.setItem("userName", res.data.userName);
-          localStorage.setItem("role", "user");
-          window.location.href = "http://localhost:3000/user-home";
-        } else if (res.data.role === "admin") {
-          localStorage.setItem("userId", res.data.userId);
-          localStorage.setItem("userName", res.data.userName);
-          localStorage.setItem("role", "admin");
-          window.location.href = "http://localhost:3000/admin-home";
-        }
-      })
-      .catch((err) => {
-        setError("Wrong username or password. Please try again.");
-        console.error(err);
+        userPassword: hashedPassword,
       });
-  };
+      if (response.data.role === "user") {
+        localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("userName", response.data.userName);
+        localStorage.setItem("role", "user");
+        window.location.href = "http://localhost:3000/user-home";
+      } else if (response.data.role === "admin") {
+        localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("userName", response.data.userName);
+        localStorage.setItem("role", "admin");
+        window.location.href = "http://localhost:3000/admin-home";
+      }
+    } catch (error) {
+      setError("Wrong username or password. Please try again.");
+      console.error(error);
+    }
+  };  
 
   const role = localStorage.getItem("role");
   if (role === "user") {
