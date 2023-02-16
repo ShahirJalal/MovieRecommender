@@ -16,19 +16,12 @@ public  class MovieRepository {
     @Autowired
     private JdbcOperations jdbcTemplate;
 
-//    private String InsertQuery = "INSERT INTO demo_movies (title, genres) VALUES (?, ?)";
-//    private String UpdateQuery = "UPDATE  movies SET title = ?, genres = ? WHERE movieId = ?";
-//    private String DeleteQuery = "DELETE  movies WHERE movieId = ?";
-    private String InsertPoster = "INSERT INTO demo_movies (email, userName, userPassword) VALUES (?, ?, ?)";
     private String RateMovie = "INSERT INTO ratings (userId, movieId, rating, timeStamp) VALUES (?, ?, ?, ?)";
 
     final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
     final String DB_URL = "jdbc:oracle:thin:@database-2.cmxecweo1rn2.ap-southeast-1.rds.amazonaws.com:1521:ORCL";
     final String USER = "admin";
     final String PASS = "Password123";
-
-    //change to get moviebyID only
-    // do a search with a 50% similarity or more
 
     private RowMapper<Movies> rowMapper=(ResultSet rs, int row)->{
         Movies movie=new Movies();
@@ -39,7 +32,7 @@ public  class MovieRepository {
     };
 
     public List<Movies> findAll(){
-        return jdbcTemplate.query("SELECT * FROM filtered_movies_medium ORDER BY movieId ASC FETCH NEXT 100 ROWS ONLY",rowMapper);
+        return jdbcTemplate.query("SELECT * FROM demo_movies ORDER BY movieId DESC FETCH NEXT 100 ROWS ONLY",rowMapper);
     }
 
     private String InsertQuery = "INSERT INTO demo_movies (title, genres) VALUES (?, ?)";
@@ -57,7 +50,7 @@ public  class MovieRepository {
     public Movies getFilteredMovieById(int movieId){
         try {
             System.out.println();
-            return jdbcTemplate.queryForObject("SELECT * FROM filtered_movies_medium WHERE movieId = ?", new Object[]{movieId}, rowMapper);
+            return jdbcTemplate.queryForObject("SELECT * FROM demo_movies WHERE movieId = ?", new Object[]{movieId}, rowMapper);
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
