@@ -35,9 +35,9 @@ public  class MovieRepository {
         return jdbcTemplate.query("SELECT * FROM demo_movies ORDER BY movieId DESC FETCH NEXT 100 ROWS ONLY",rowMapper);
     }
 
-    private String InsertQuery = "INSERT INTO demo_movies (title, genres) VALUES (?, ?)";
-    public boolean addMovie(Movies movie){
-        return jdbcTemplate.update(InsertQuery, movie.getTitle(), movie.getGenres()) > 0;
+    public boolean addMovie(Movies movie) {
+        String InsertQuery = "INSERT INTO demo_movies (title, genres, poster) VALUES (?, ?, ?)";
+        return jdbcTemplate.update(InsertQuery, movie.getTitle(), movie.getGenres(), movie.getPoster()) > 0;
     }
 
     private String UpdateQuery = "UPDATE  demo_movies SET title = ?, genres = ? WHERE movieId = ?";

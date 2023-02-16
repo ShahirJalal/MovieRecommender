@@ -23,4 +23,8 @@ public class Movies {
 
     @Column(name = "title")
     private String title;
+
+    @Lob
+    @Column(name = "poster", columnDefinition = "BLOB")
+    private byte[] poster;
 }

@@ -40,10 +40,14 @@ public class MovieService {
     public String addMovie(Movies mov) {
         String response;
 
-        if (movieRepository.addMovie(mov))
+        if (mov.getPoster() == null) {
+            response = "Poster is missing. Please upload a poster for the movie.";
+        } else if (movieRepository.addMovie(mov)) {
             response = "Successfully added";
-        else
+        } else {
             response = "Something went wrong. Not added, please try again";
+        }
+
         return response;
     }
 

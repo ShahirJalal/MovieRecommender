@@ -4,6 +4,8 @@ import com.capstone.backend.model.Movies;
 import com.capstone.backend.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
 
 import java.util.List;
 
@@ -36,8 +38,23 @@ public class MovieController {
     }
 
     @PostMapping("/addMovie")
-    public String addMovie(@RequestBody Movies mov) {
-        return movieService.addMovie(mov);
+    public String addMovie(@RequestParam("poster") MultipartFile posterFile,
+                           @RequestParam("title") String title,
+                           @RequestParam("genres") String genres) {
+        String response;
+
+        try {
+            byte[] poster = posterFile.getBytes();
+            Movies mov = new Movies();
+            mov.setTitle(title);
+            mov.setGenres(genres);
+            mov.setPoster(poster);
+            response = movieService.addMovie(mov);
+        } catch (IOException e) {
+            response = "Error uploading poster: " + e.getMessage();
+        }
+
+        return response;
     }
 
     @PutMapping("/updateMovie/{movieId}")
