@@ -1,46 +1,26 @@
 package com.capstone.backend.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "demo_movies")
+@Entity
 
 public class Movies {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movieId_seq")
+    @SequenceGenerator(name = "movieId_seq", sequenceName = "MOVIE_ID_SEQ", initialValue = 193610, allocationSize = 1)
+    @Column(name = "movieid")
     private int movieId;
+
+    @Column(name = "genres")
     private String genres;
+
+    @Column(name = "title")
     private String title;
-
-    public Movies(int movieId, String genres, String title) {
-        this.movieId = movieId;
-        this.genres = genres;
-        this.title = title;
-    }
-
-    public Movies() {
-    }
-
-    public int getMovieId() {
-        return movieId;
-    }
-
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
-
-    public String getGenres() {
-        return genres;
-    }
-
-    public void setGenres(String genres) {
-        this.genres = genres;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }
