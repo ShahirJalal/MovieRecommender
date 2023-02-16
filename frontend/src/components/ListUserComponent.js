@@ -40,6 +40,7 @@ const ListUserComponent = () => {
                         <th> Email </th> 
                         <th> UserName </th> 
                         <th> UserPassword </th>
+                        <th> Role </th>
                         <th> Function </th>
                     </tr>
                 </thead>
@@ -51,7 +52,8 @@ const ListUserComponent = () => {
                             <td> {user.userId} </td> 
                             <td> {user.email} </td> 
                             <td> {user.userName} </td> 
-                            <td>{user.userPassword}</td> 
+                            <td>{user.userPassword}</td>
+                            <td>{user.role}</td>  
                             <td>
                                 <Link className='btn btn-info' to={`/edit-user/${user.userId}`}>Update</Link>
                                 <button className='btn btn-danger' onClick={()=>deleteUser(user.userId)} 
