@@ -16,7 +16,7 @@ const AddMovieComponent = () => {
       MovieService.updateMovie(movieId, movie)
         .then((response) => {
           console.log(response.data);
-          navigate('/movies');
+          navigate('/admin-movies');
         })
         .catch((error) => {
           console.log(error);
@@ -25,7 +25,7 @@ const AddMovieComponent = () => {
       MovieService.createMovie(movie)
         .then((response) => {
           console.log(response.data);
-          navigate('/movies');
+          navigate('/admin-movies');
         })
         .catch((error) => {
           console.log(error);
