@@ -3,21 +3,22 @@ import MovieService from '../services/MovieService';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const AddMovieComponent = () => {
+  const [movieId, setMovieId] = useState('');
   const [title, setTitle] = useState('');
   const [genres, setGenres] = useState('');
-  const [posterFile, setPosterFile] = useState(null);
   const navigate = useNavigate();
-  const { movieId } = useParams();
+  const { movieId: paramMovieId } = useParams();
 
   const saveOrUpdateMovie = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('genres', genres);
-    formData.append('poster', posterFile);
+    const formData = {
+      movieId,
+      title,
+      genres
+    };
     console.log(formData);
-    if (movieId) {
-      MovieService.updateMovie(movieId, formData)
+    if (paramMovieId) {
+      MovieService.updateMovie(paramMovieId, formData)
         .then((response) => {
           console.log(response.data);
           navigate('/admin-movies');
@@ -38,10 +39,11 @@ const AddMovieComponent = () => {
   };
 
   useEffect(() => {
-    if (movieId) {
-      MovieService.getMoviebyId(movieId)
+    if (paramMovieId) {
+      MovieService.getMoviebyId(paramMovieId)
         .then((response) => {
           console.log(response.data.title);
+          setMovieId(response.data.movieId);
           setTitle(response.data.title);
           setGenres(response.data.genres);
         })
@@ -49,18 +51,14 @@ const AddMovieComponent = () => {
           console.log(error);
         });
     }
-  }, [movieId]);
+  }, [paramMovieId]);
 
   const pageTitle = () => {
-    if (movieId) {
+    if (paramMovieId) {
       return <h2 className="text-center">Update Movie</h2>;
     } else {
       return <h2 className="text-center">Add Movie</h2>;
     }
-  };
-
-  const handlePosterChange = (e) => {
-    setPosterFile(e.target.files[0]);
   };
 
   return (
@@ -71,7 +69,18 @@ const AddMovieComponent = () => {
           <div className="card col-md-6 offset-md-3 offset-md-3">
             {pageTitle()}
             <div className="card-body">
-              <form encType="multipart/form-data">
+              <form>
+                <div className="form-group mb-2">
+                  <label className="form-label">Movie ID:</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Movie ID"
+                    name="movieId"
+                    className="form-control"
+                    value={movieId}
+                    onChange={(e) => setMovieId(e.target.value)}
+                  />
+                </div>
                 <div className="form-group mb-2">
                   <label className="form-label">Movie Title:</label>
                   <input
@@ -94,16 +103,6 @@ const AddMovieComponent = () => {
                     onChange={(e) => setGenres(e.target.value)}
                   />
                 </div>
-                <div className="form-group mb-2">
-                  <label className="form-label">Poster:</label>
-                  <input
-                    type="file"
-                    name="poster"
-                    accept=".jpeg,.jpg"
-                    className="form-control"
-                    onChange={handlePosterChange}
-                  />
-                </div>
                 <button
                   className="btn btn-success"
                   onClick={(e) => saveOrUpdateMovie(e)}
@@ -111,7 +110,7 @@ const AddMovieComponent = () => {
                 >
                   Save Movie
                 </button>
-                <Link to="/movies" className="btn btn-danger">
+                <Link to="/admin-movies" className="btn btn-danger">
                   Cancel
                 </Link>
               </form>

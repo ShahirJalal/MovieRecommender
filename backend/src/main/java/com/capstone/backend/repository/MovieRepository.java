@@ -36,8 +36,8 @@ public  class MovieRepository {
     }
 
     public boolean addMovie(Movies movie) {
-        String InsertQuery = "INSERT INTO demo_movies (title, genres, poster) VALUES (?, ?, ?)";
-        return jdbcTemplate.update(InsertQuery, movie.getTitle(), movie.getGenres(), movie.getPoster()) > 0;
+        String InsertQuery = "INSERT INTO demo_movies (movieId, title, genres) VALUES (?, ?, ?)";
+        return jdbcTemplate.update(InsertQuery,movie.getMovieId(), movie.getTitle(), movie.getGenres()) > 0;
     }
 
     private String UpdateQuery = "UPDATE  demo_movies SET title = ?, genres = ? WHERE movieId = ?";

@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 
 public class Movies {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "movieId_seq")
-    @SequenceGenerator(name = "movieId_seq", sequenceName = "MOVIE_ID_SEQ", initialValue = 193610, allocationSize = 1)
     @Column(name = "movieid")
     private int movieId;
 
@@ -23,8 +21,4 @@ public class Movies {
 
     @Column(name = "title")
     private String title;
-
-    @Lob
-    @Column(name = "poster", columnDefinition = "BLOB")
-    private byte[] poster;
 }
