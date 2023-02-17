@@ -61,6 +61,26 @@ const AddMovieComponent = () => {
     }
   };
 
+  const renderMovieIdField = () => {
+    if (paramMovieId) {
+      return null;
+    } else {
+      return (
+        <div className="form-group mb-2">
+          <label className="form-label">Movie ID:</label>
+          <input
+            type="text"
+            placeholder="Enter Movie ID"
+            name="movieId"
+            className="form-control"
+            value={movieId}
+            onChange={(e) => setMovieId(e.target.value)}
+          />
+        </div>
+      );
+    }
+  };
+
   return (
     <div>
       <br />
@@ -70,17 +90,19 @@ const AddMovieComponent = () => {
             {pageTitle()}
             <div className="card-body">
               <form>
-                <div className="form-group mb-2">
-                  <label className="form-label">Movie ID:</label>
-                  <input
-                    type="text"
-                    placeholder="Enter Movie ID"
-                    name="movieId"
-                    className="form-control"
-                    value={movieId}
-                    onChange={(e) => setMovieId(e.target.value)}
-                  />
-                </div>
+                {(!paramMovieId) && (
+                  <div className="form-group mb-2">
+                    <label className="form-label">Movie ID:</label>
+                    <input
+                      type="text"
+                      placeholder="Enter Movie ID"
+                      name="movieId"
+                      className="form-control"
+                      value={movieId}
+                      onChange={(e) => setMovieId(e.target.value)}
+                    />
+                  </div>
+                )}
                 <div className="form-group mb-2">
                   <label className="form-label">Movie Title:</label>
                   <input
@@ -120,6 +142,6 @@ const AddMovieComponent = () => {
       </div>
     </div>
   );
-};
-
+}
+                
 export default AddMovieComponent;
