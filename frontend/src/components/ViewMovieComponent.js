@@ -17,11 +17,18 @@ const ViewMovieComponent = () => {
   }, [movieId]);
 
   return (
-    <div>
-      <h2>{movie.title}</h2>
-      <p>Genre: {movie.genre}</p>
-      <MoviePoster movieId={movieId} />
-      <MovieOverview movieId={movieId} />
+    <div className="container my-5">
+      <div className="row">
+        <div className="col-md-4">
+          <MoviePoster movieId={movieId} className="img-fluid rounded" />
+        </div>
+        <div className="col-md-8">
+          <h2>{movie.title}</h2>
+          <p className="text-muted">{movie.genres}</p>
+          <hr />
+          <MovieOverview movieId={movieId} />
+        </div>
+      </div>
     </div>
   );
 };
