@@ -80,13 +80,17 @@ const ListMovieComponent = () => {
                             <td>
                                 <Link className='btn btn-warning' to={`/edit-movie/${movie.movieId}`}>Update</Link>
                                 <button className='btn btn-danger' onClick={()=>deleteMovie(movie.movieId)} 
-                                style={{marginLeft:"10px", marginRight: "10px"}}>Delete</button>
+                                        style={{marginLeft:"10px", marginRight: "10px"}}>Delete</button>
                                 <Link className='btn btn-success' to={`/recommendations/${movie.movieId}`}>Recommendation</Link>
                                 <button className='btn btn-primary' 
-                                    style={{marginLeft:"10px"}} 
-                                    onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}>
-                                    Add to Favourites
+                                        style={{marginLeft:"10px"}} 
+                                        onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}>
+                                        Add to Favourites
                                 </button>
+                                <Link className='btn btn-primary' 
+                                      style={{marginLeft:"10px"}} 
+                                      to={`/view-movie/${movie.movieId}`}>View Movie
+                                </Link>
                             </td>                      
                             </tr>
                     )

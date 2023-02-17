@@ -15,6 +15,7 @@ import UserHome from './components/UserHome';
 import UserMovies from './components/UserMovies';
 import AdminHome from './components/AdminHome';
 import FavouritesList from './components/FavouritesList';
+import ViewMovieComponent from './components/ViewMovieComponent';
 import React from 'react';
 
 function App() {
@@ -40,6 +41,8 @@ function App() {
             <Route path = "/users" element={<ListUserComponent/>}></Route>
             <Route path = "/add-User" element={<AddUserComponent/>}></Route>
             <Route path = "/edit-user/:userId" element={<AddUserComponent/>}></Route>
+
+            <Route path = "/view-movie/:movieId" element={<ViewMovieComponent/>}></Route>
         </Routes>
       </div>
       <CustomFooter></CustomFooter>
