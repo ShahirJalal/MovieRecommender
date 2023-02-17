@@ -10,7 +10,6 @@ const useMoviePoster = (movieId) => {
 
   useEffect(() => {
     MovieService.getLinksFromMovie(movieId).then((response) => {
-      // console.log(response.data.tmdbid);
       setTmdbId(response.data.tmdbId);
     }).catch(error => {
       console.log(error);
