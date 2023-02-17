@@ -6,6 +6,7 @@ import FavouriteService from '../services/FavouriteService';
 
 const RecommendComponent = () => {
   const [movies, setMovies] = useState([]);
+  const [successMessage, setSuccessMessage] = useState('');
   const { movieId } = useParams();
 
   useEffect(() => {
@@ -17,30 +18,36 @@ const RecommendComponent = () => {
   }, [movieId]);
 
   const addToFavourites = (movieId, title, genres) => {
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem('userId');
     if (userId) {
       const favourite = {
         movieId: movieId,
         title: title,
         genres: genres,
-        userId: userId
+        userId: userId,
       };
       FavouriteService.addFavourite(favourite)
         .then((response) => {
           console.log(response);
+          setSuccessMessage('Movie added to Favourites');
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     } else {
-      alert("Please log in first to add to favourites.");
+      alert('Please log in first to add to favourites.');
     }
   };
 
   return (
     <div className="container">
       <br />
-      <h2 className='text-center'>Recommended Movies</h2>
+      <h2 className="text-center">Recommended Movies</h2>
+      {successMessage && (
+        <div className="alert alert-success" role="alert">
+          {successMessage}
+        </div>
+      )}
       <br />
       <table className="table table-bordered table-striped">
         <thead>
@@ -54,11 +61,18 @@ const RecommendComponent = () => {
         <tbody>
           {movies.map((movie) => (
             <tr key={movie.movieId}>
-              <td><MoviePoster movieId={movie.movieId} /></td>
+              <td>
+                <MoviePoster movieId={movie.movieId} />
+              </td>
               <td>{movie.title}</td>
               <td>{movie.genres}</td>
               <td>
-                <button className='btn btn-success' onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}>Add To Favourite</button>
+                <button
+                  className="btn btn-success"
+                  onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}
+                >
+                  Add To Favourite
+                </button>
               </td>
             </tr>
           ))}

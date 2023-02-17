@@ -29,24 +29,26 @@ const ListMovieComponent = () => {
             }
 
             const addToFavourites = (movieId, title, genres) => {
-                const userId = localStorage.getItem("userId");
-                if (userId) {
-                  const favourite = {
-                    movieId: movieId,
-                    title: title,
-                    genres: genres,
-                    userId: userId
-                  };
-                
-                  FavouriteService.addFavourite(favourite).then((response) => {
+              const userId = localStorage.getItem("userId");
+              if (userId) {
+                const favourite = {
+                  movieId: movieId,
+                  title: title,
+                  genres: genres,
+                  userId: userId
+                };
+                FavouriteService.addFavourite(favourite)
+                  .then((response) => {
                     console.log(response);
-                  }).catch(error => {
+                    alert("Movie added to Favourites");
+                  })
+                  .catch((error) => {
                     console.log(error);
                   });
-                } else {
-                  alert("Please log in first to add to favourites.");
-                }
-              };              
+              } else {
+                alert("Please log in first to add to favourites.");
+              }
+            };                          
               
          const lastPostIndex = currentPage*postsPerPage;
         const firstPostIndex = lastPostIndex - postsPerPage;
