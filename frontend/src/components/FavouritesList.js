@@ -54,18 +54,18 @@ const FavouritesList = () => {
               <td>{favourite.title}</td>
               <td>{favourite.genres}</td>
               <td>
+              <Link
+                  className="btn btn-primary"
+                  style={{ marginRight: '10px' }}
+                  to={`/view-movie/${favourite.movieId}`}
+                >
+                  View Movie
+                </Link>
                 <Link
                   className="btn btn-success"
                   to={`/recommendations/${favourite.movieId}`}
                 >
                   Recommendation
-                </Link>
-                <Link
-                  className="btn btn-primary"
-                  style={{ marginLeft: '10px' }}
-                  to={`/view-movie/${favourite.movieId}`}
-                >
-                  View Movie
                 </Link>
                 <button
                   className="btn btn-danger"

@@ -32,16 +32,17 @@ const UserMovies = () => {
         genres: genres,
         userId: userId
       };
-
+  
       FavouriteService.addFavourite(favourite).then((response) => {
         console.log(response);
+        alert("Movie added to Favourites");
       }).catch(error => {
         console.log(error);
       });
     } else {
       alert("Please log in first to add to favourites.");
     }
-  };
+  };  
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
@@ -69,6 +70,10 @@ const UserMovies = () => {
                   <td>{movie.title}</td>
                   <td>{movie.genres}</td>
                   <td>
+                  <Link className='btn btn-primary' 
+                                      style={{marginRight:"10px"}} 
+                                      to={`/view-movie/${movie.movieId}`}>View Movie
+                                </Link>
                     <Link className='btn btn-success' to={`/recommendations/${movie.movieId}`}>Recommendation</Link>
                     <button className='btn btn-primary' style={{ marginLeft: "10px" }} onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}>
                       Add to Favourites
