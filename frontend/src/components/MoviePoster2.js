@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import MovieService from '../services/MovieService'
+import MovieService from '../services/MovieService';
 import React from 'react';
 
 
@@ -10,7 +10,6 @@ const useMoviePoster = (movieId) => {
 
   useEffect(() => {
     MovieService.getLinksFromMovie(movieId).then((response) => {
-
       setTmdbId(response.data.tmdbId);
     }).catch(error => {
       console.log(error);
@@ -25,12 +24,11 @@ const useMoviePoster = (movieId) => {
     fetchData();
   }, [tmdbId]);
 
-  return <img  style={{radius:"60px",flex: "1",  display:"block", margin: '0 auto', width:"75px"}} src={`https://image.tmdb.org/t/p/w500/${posterPath}`} />;
+  return <img style={{borderRadius: "10px", display:"block", margin: '0 auto', maxWidth:"100%"}} src={`https://image.tmdb.org/t/p/original/${posterPath}`} />;
 };
 
 const MoviePoster = ({ movieId }) => {
   return useMoviePoster(movieId);
 };
-
 
 export default MoviePoster;

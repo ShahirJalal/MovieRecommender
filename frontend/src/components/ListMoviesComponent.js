@@ -88,7 +88,7 @@ const ListMovieComponent = () => {
                                         Add to Favourites
                                 </button>
                                 <Link className='btn btn-primary' 
-                                      style={{marginLeft:"10px"}} 
+                                      style={{marginTop:"10px"}} 
                                       to={`/view-movie/${movie.movieId}`}>View Movie
                                 </Link>
                             </td>                      

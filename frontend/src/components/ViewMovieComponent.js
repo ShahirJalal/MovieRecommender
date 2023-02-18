@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MoviePoster from './MoviePoster';
+import MoviePoster from './MoviePoster2';
 import MovieOverview from './MovieOverview';
 import MovieService from '../services/MovieService';
 import { useParams } from 'react-router-dom';
