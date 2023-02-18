@@ -4,6 +4,8 @@ import MovieOverview from './MovieOverview';
 import MovieService from '../services/MovieService';
 import RatingService from '../services/RatingService';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import FavouriteService from '../services/FavouriteService';
 
 const ViewMovieComponent = () => {
   const [movie, setMovie] = useState({});
@@ -37,6 +39,28 @@ const ViewMovieComponent = () => {
     });
   };
 
+  const addToFavourites = (movieId, title, genres) => {
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      const favourite = {
+        movieId: movieId,
+        title: title,
+        genres: genres,
+        userId: userId
+      };
+      FavouriteService.addFavourite(favourite)
+        .then((response) => {
+          console.log(response);
+          alert("Movie added to Favourites");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("Please log in first to add to favourites.");
+    }
+  };
+
   return (
     <div className="container my-5">
       <div className="row">
@@ -66,6 +90,12 @@ const ViewMovieComponent = () => {
             <button type="submit" className="btn btn-primary">Submit Rating</button>
           </form>
           <MovieOverview movieId={movieId} />
+          <Link className='btn btn-success' to={`/recommendations/${movie.movieId}`}>Recommendation</Link>
+          <button className='btn btn-primary' 
+                  style={{marginLeft:"10px"}} 
+                  onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}>
+                  Add to Favourites
+          </button>
         </div>
       </div>
     </div>
