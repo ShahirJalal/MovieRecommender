@@ -31,4 +31,15 @@ public class FavouriteService {
         return favouriteRepository.getFavouriteById(userId);
     }
 
+    public String deleteFavourite(int favouriteId) {
+        String response;
+
+        if (favouriteRepository.deleteFavourite(favouriteId))
+            response = "Favourite deleted successfully";
+        else
+            response = "Something went wrong. Favourite not deleted, please try again";
+
+        return response;
+    }
+
 }

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import MoviePoster from './MoviePoster';
 import FavouriteService from '../services/FavouriteService';
+import { Link } from 'react-router-dom';
 
 const RecommendComponent = () => {
   const [movies, setMovies] = useState([]);
@@ -73,6 +74,10 @@ const RecommendComponent = () => {
                 >
                   Add To Favourite
                 </button>
+                <Link className='btn btn-primary' 
+                                      style={{marginLeft:"10px"}} 
+                                      to={`/view-movie/${movie.movieId}`}>View Movie
+                </Link>
               </td>
             </tr>
           ))}

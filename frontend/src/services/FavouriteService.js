@@ -1,19 +1,23 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/v1/favourites/'
+const API_URL = 'http://localhost:8080/api/v1/favourites/';
 
 class FavouriteService {
-    getAll() {
-        return axios.get(API_URL + 'getAll')
-    }
+  getAll() {
+    return axios.get(API_URL + 'getAll');
+  }
 
-    getFavouriteById(userId) {
-        return axios.get(API_URL + `favourites/${userId}`)
-    }
+  getFavouriteById(userId) {
+    return axios.get(API_URL + `favourites/${userId}`);
+  }
 
-    addFavourite(favourite) {
-        return axios.post(API_URL + 'addFavourite', favourite)
-    }
+  addFavourite(favourite) {
+    return axios.post(API_URL + 'addFavourite', favourite);
+  }
+
+  deleteFavourite(favouriteId) {
+    return axios.delete(API_URL + `deleteFavourite/${favouriteId}`);
+  }
 }
 
-export default new FavouriteService()
+export default new FavouriteService();

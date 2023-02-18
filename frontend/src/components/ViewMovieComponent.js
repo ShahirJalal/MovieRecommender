@@ -87,7 +87,7 @@ const ViewMovieComponent = () => {
                 <label htmlFor="star5"></label>
               </div>
             </div>
-            <button type="submit" className="btn btn-primary">Submit Rating</button>
+            <button type="submit" className="btn btn-warning">Submit Rating</button>
           </form>
           <MovieOverview movieId={movieId} />
           <Link className='btn btn-success' to={`/recommendations/${movie.movieId}`}>Recommendation</Link>

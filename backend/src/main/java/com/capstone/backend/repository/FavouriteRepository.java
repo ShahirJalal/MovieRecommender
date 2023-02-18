@@ -14,15 +14,6 @@ public class FavouriteRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-//    private RowMapper<Favourites> rowMapper=(ResultSet rs, int row)->{
-//        Favourites favourite=new Favourites();
-//        favourite.setGenres(rs.getString(1));
-//        favourite.setMovieId(rs.getInt(2));
-//        favourite.setTitle(rs.getString(3));
-//        favourite.setUserId(rs.getInt(4));
-//        return favourite;
-//    };
-
     private RowMapper<Favourites> rowMapper=(ResultSet rs, int row)->{
         Favourites favourite=new Favourites();
         favourite.setFavouriteId(rs.getInt("favouriteid"));
@@ -39,11 +30,6 @@ public class FavouriteRepository {
         return false;
     }
 
-//    public List<Favourites> getAll() {
-//        String SELECT_ALL = "SELECT * FROM demo_favourites";
-//        return jdbcTemplate.query(SELECT_ALL, rowMapper);
-//    }
-
     public List<Favourites> getAll() {
         String SELECT_ALL = "SELECT * FROM demo_favourites ORDER BY userId ASC";
         return jdbcTemplate.query(SELECT_ALL, rowMapper);
@@ -52,6 +38,14 @@ public class FavouriteRepository {
     public List<Favourites> getFavouriteById(int userId) {
         String SELECT_BY_ID = "SELECT * FROM demo_favourites WHERE userId = ?";
         return jdbcTemplate.query(SELECT_BY_ID, new Object[] {userId}, rowMapper);
+    }
+
+    public boolean deleteFavourite(int favouriteId) {
+        String DELETE_FAVOURITE = "DELETE FROM demo_favourites WHERE favouriteId = ?";
+        if (jdbcTemplate.update(DELETE_FAVOURITE, favouriteId) > 0)
+            return true;
+        else
+            return false;
     }
 
 }
