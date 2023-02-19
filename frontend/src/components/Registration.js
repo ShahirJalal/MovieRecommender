@@ -3,6 +3,22 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { hashPassword } from './passwordUtils';
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (role === 'admin') {
+      window.location.href = 'http://localhost:3000/admin-home';
+      return null;
+    } else if (role === 'user') {
+      window.location.href = 'http://localhost:3000/user-home';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const Registration = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -122,4 +138,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default withRoleCheck(Registration);

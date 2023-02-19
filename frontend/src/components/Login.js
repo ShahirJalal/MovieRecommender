@@ -2,6 +2,22 @@ import React, { useState } from "react";
 import axios from "axios";
 import { hashPassword } from './passwordUtils';
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (role === 'admin') {
+      window.location.href = 'http://localhost:3000/admin-home';
+      return null;
+    } else if (role === 'user') {
+      window.location.href = 'http://localhost:3000/user-home';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -78,4 +94,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default withRoleCheck(Login);
