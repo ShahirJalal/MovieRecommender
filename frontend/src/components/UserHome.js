@@ -1,6 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (role === 'admin') {
+      window.location.href = 'http://localhost:3000/admin-home';
+      return null;
+    } else if (!role) {
+      window.location.href = 'http://localhost:3000';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const UserHome = () => {
   return (
     <div className="container my-5 d-flex justify-content-center">
@@ -24,4 +40,4 @@ const UserHome = () => {
   );
 };
 
-export default UserHome;
+export default withRoleCheck(UserHome);
