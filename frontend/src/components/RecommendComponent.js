@@ -5,6 +5,19 @@ import MoviePoster from './MoviePoster';
 import FavouriteService from '../services/FavouriteService';
 import { Link } from 'react-router-dom';
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (!role) {
+      window.location.href = 'http://localhost:3000';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const RecommendComponent = () => {
   const [movies, setMovies] = useState([]);
   const [successMessage, setSuccessMessage] = useState('');
@@ -90,4 +103,4 @@ const RecommendComponent = () => {
   );
 };
 
-export default RecommendComponent;
+export default withRoleCheck(RecommendComponent);

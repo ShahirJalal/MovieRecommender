@@ -9,6 +9,19 @@ import FavouriteService from '../services/FavouriteService';
 import StarRatings from 'react-star-ratings';
 import MovieRating from './MovieRating';
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (!role) {
+      window.location.href = 'http://localhost:3000';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const ViewMovieComponent = () => {
   const [movie, setMovie] = useState({});
   const [rating, setRating] = useState(0);
@@ -116,4 +129,4 @@ const ViewMovieComponent = () => {
   );  
 };
 
-export default ViewMovieComponent;
+export default withRoleCheck(ViewMovieComponent);

@@ -3,6 +3,19 @@ import FavouriteService from '../services/FavouriteService';
 import MoviePoster from './MoviePoster';
 import { Link } from 'react-router-dom';
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (!role) {
+      window.location.href = 'http://localhost:3000';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const FavouritesList = () => {
   const [favourites, setFavourites] = useState([]);
 
@@ -83,4 +96,4 @@ const FavouritesList = () => {
   );
 };
 
-export default FavouritesList;
+export default withRoleCheck(FavouritesList);
