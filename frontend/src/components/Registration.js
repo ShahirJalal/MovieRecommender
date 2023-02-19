@@ -55,18 +55,7 @@ const Registration = () => {
       setErrorMessage("Error registering user");
       setIsSuccessful(false);
     }
-  };  
-
-  const roleFromLocalStorage = localStorage.getItem("role");
-  if (roleFromLocalStorage) {
-    if (roleFromLocalStorage === "user") {
-      window.location.href = "http://localhost:3000/user-home";
-    } else if (roleFromLocalStorage === "admin") {
-      window.location.href = "http://localhost:3000/admin-home";
-    } else {
-      window.location.href = "http://localhost:3000/login";
-    }
-  }
+  };
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
