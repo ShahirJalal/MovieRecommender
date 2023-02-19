@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { hashPassword } from './passwordUtils';
+import { hashPassword } from './PasswordUtils';
 
 const withRoleCheck = (Component) => {
   return () => {

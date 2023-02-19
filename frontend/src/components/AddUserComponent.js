@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import UserService from "../services/UserService";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { hashPassword } from "./passwordUtils";
+import { hashPassword } from "./PasswordUtils";
 
 const withRoleCheck = (Component) => {
   return () => {

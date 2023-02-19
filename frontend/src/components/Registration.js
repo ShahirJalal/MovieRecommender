@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { hashPassword } from './passwordUtils';
+import { hashPassword } from './PasswordUtils';
 
 const withRoleCheck = (Component) => {
   return () => {
