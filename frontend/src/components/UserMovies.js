@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import MovieService from '../services/MovieService'
 import Pagination from './Pagination'
-import MoviePoster from './MoviePoster'
+import MoviePoster from './MoviePosterSmall'
 import { Link } from 'react-router-dom'
 import FavouriteService from '../services/FavouriteService'
 

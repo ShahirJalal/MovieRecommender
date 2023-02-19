@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import MovieService from '../services/MovieService'
 import Pagination from './Pagination'
 import { Link } from 'react-router-dom'
-import MoviePoster from './MoviePoster'
+import MoviePoster from './MoviePosterSmall'
 import FavouriteService from '../services/FavouriteService'
 
 const withRoleCheck = (Component) => {

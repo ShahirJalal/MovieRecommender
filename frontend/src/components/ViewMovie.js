@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MoviePoster from './MoviePoster2';
+import MoviePoster from './MoviePosterBig';
 import MovieOverview from './MovieOverview';
 import MovieService from '../services/MovieService';
 import RatingService from '../services/RatingService';

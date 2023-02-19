@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FavouriteService from '../services/FavouriteService';
-import MoviePoster from './MoviePoster';
+import MoviePoster from './MoviePosterSmall';
 import { Link } from 'react-router-dom';
 
 const withRoleCheck = (Component) => {

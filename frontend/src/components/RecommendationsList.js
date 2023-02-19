@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import MoviePoster from './MoviePoster';
+import MoviePoster from './MoviePosterSmall';
 import FavouriteService from '../services/FavouriteService';
 import { Link } from 'react-router-dom';
 
