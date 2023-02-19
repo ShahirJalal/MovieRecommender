@@ -27,9 +27,9 @@ const Registration = () => {
           email,
           userName,
           userPassword: hashedPassword,
-          role,
+          role: "user", // Set the role to "user"
         }
-      );
+      );      
       if (response.data) {
         setIsSuccessful(true);
         setErrorMessage("");
@@ -103,18 +103,6 @@ const Registration = () => {
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />
-            </div>
-            <div className="form-group mb-2">
-              <label htmlFor="role">Role:</label>
-              <select
-                id="role"
-                className="form-control"
-                value={role}
-                onChange={(event) => setRole(event.target.value)}
-              >
-                <option value="user">user</option>
-                <option value="admin">admin</option>
-              </select>
             </div>
             <button type="submit" className="btn btn-primary mt-2">
               Register

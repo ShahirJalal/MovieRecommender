@@ -6,6 +6,7 @@ import RatingService from '../services/RatingService';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import FavouriteService from '../services/FavouriteService';
+import MovieRating from './MovieRating';
 
 const ViewMovieComponent = () => {
   const [movie, setMovie] = useState({});
@@ -82,6 +83,7 @@ const ViewMovieComponent = () => {
           <hr />
           <form onSubmit={handleRatingSubmit}>
             <div className="form-group">
+            <MovieRating movieId={movieId} /><br />
               <label htmlFor="rating">Rate this movie:</label>
               <div className="rating">
                 <input type="radio" id="star1" name="rating" value="1" onChange={handleRatingChange} />
