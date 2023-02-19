@@ -24,7 +24,6 @@ const Registration = () => {
   const [email, setEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [role, setRole] = useState("user");
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 

@@ -24,7 +24,7 @@ const useMoviePoster = (movieId) => {
     fetchData();
   }, [tmdbId]);
 
-  return <img style={{borderRadius: "10px", display:"block", margin: '0 auto', maxWidth:"100%"}} src={`https://image.tmdb.org/t/p/original/${posterPath}`} />;
+  return <img alt="" style={{borderRadius: "10px", display:"block", margin: '0 auto', maxWidth:"100%"}} src={`https://image.tmdb.org/t/p/original/${posterPath}`} />;
 };
 
 const MoviePoster = ({ movieId }) => {

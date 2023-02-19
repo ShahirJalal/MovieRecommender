@@ -24,7 +24,7 @@ const withRoleCheck = (Component) => {
 const ListMovieComponent = () => {
       const [movie, setMovie] = useState([]);
       const [currentPage, setCurrentPage] = useState (1);
-      const [postsPerPage, setPostsPerPage] = useState (5)
+      const postsPerPage = 5
       const [successMessage, setSuccessMessage] = useState('');
             useEffect(() => {
                 getMovies();

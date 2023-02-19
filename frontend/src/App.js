@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, BrowserRouter as Router, Route, Routes }from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CustomFooter from './components/CustomFooter';
 import CustomHeader from './components/CustomHeader';
 import ListUserComponent from './components/ListUserComponent';

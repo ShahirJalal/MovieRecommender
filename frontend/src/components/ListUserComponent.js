@@ -22,7 +22,7 @@ const withRoleCheck = (Component) => {
 const ListUserComponent = () => {
       const [user, setUser] = useState([])
       const [currentPage, setCurrentPage] = useState (1);
-      const [postsPerPage, setPostsPerPage] = useState (10)
+      const postsPerPage = 10
             useEffect(() => {
                 getUsers();
             }, [])
