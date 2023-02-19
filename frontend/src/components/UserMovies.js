@@ -5,6 +5,22 @@ import MoviePoster from './MoviePoster'
 import { Link } from 'react-router-dom'
 import FavouriteService from '../services/FavouriteService'
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (role === 'admin') {
+      window.location.href = 'http://localhost:3000/admin-home';
+      return null;
+    } else if (!role) {
+      window.location.href = 'http://localhost:3000';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const UserMovies = () => {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -103,4 +119,4 @@ const UserMovies = () => {
   )
 }
 
-export default UserMovies;
+export default withRoleCheck(UserMovies);
