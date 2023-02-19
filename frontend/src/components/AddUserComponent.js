@@ -12,19 +12,27 @@ const AddUserComponent = () => {
   const { userId } = useParams();
   const saveOrUpdateUser = (e) => {
     e.preventDefault();
-
-    const hashedPassword = hashPassword(userPassword); // hash the password
-
+  
     const user = {
       userId,
       email,
       userName,
-      userPassword: hashedPassword,
       role,
     };
-
+  
     if (userId) {
-      UserService.updateUser(userId, user)
+      UserService.getUserbyId(userId)
+        .then((response) => {
+          const { userPassword: oldPassword } = response.data;
+          if (oldPassword === userPassword) {
+            user.userPassword = oldPassword;
+            return UserService.updateUser(userId, user);
+          } else {
+            const hashedPassword = hashPassword(userPassword); // hash the password
+            user.userPassword = hashedPassword;
+            return UserService.updateUser(userId, user);
+          }
+        })
         .then((response) => {
           console.log(response.data);
           navigate("/users");
@@ -33,6 +41,8 @@ const AddUserComponent = () => {
           console.log(error);
         });
     } else {
+      const hashedPassword = hashPassword(userPassword); // hash the password
+      user.userPassword = hashedPassword;
       UserService.createUser(user)
         .then((response) => {
           console.log(response.data);
@@ -42,7 +52,7 @@ const AddUserComponent = () => {
           console.log(error);
         });
     }
-  };
+  };  
 
   useEffect(() => {
     UserService.getUserbyId(userId)
