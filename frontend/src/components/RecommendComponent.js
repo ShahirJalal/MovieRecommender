@@ -31,6 +31,9 @@ const RecommendComponent = () => {
         .then((response) => {
           console.log(response);
           setSuccessMessage('Movie added to Favourites');
+          setTimeout(() => {
+            setSuccessMessage('');
+          }, 1000); // 1 second delay
         })
         .catch((error) => {
           console.log(error);
@@ -38,7 +41,7 @@ const RecommendComponent = () => {
     } else {
       alert('Please log in first to add to favourites.');
     }
-  };
+  };  
 
   return (
     <div className="container">
@@ -68,16 +71,16 @@ const RecommendComponent = () => {
               <td>{movie.title}</td>
               <td>{movie.genres}</td>
               <td>
+                <Link className='btn btn-primary' 
+                                      to={`/view-movie/${movie.movieId}`}>View Movie
+                </Link>
+                <Link className='btn btn-success' style={{marginLeft:"10px"}} to={`/recommendations/${movie.movieId}`}>Recommendation</Link>
                 <button
-                  className="btn btn-success"
+                  className="btn btn-success" style={{marginLeft:"10px"}}
                   onClick={() => addToFavourites(movie.movieId, movie.title, movie.genres)}
                 >
                   Add To Favourite
                 </button>
-                <Link className='btn btn-primary' 
-                                      style={{marginLeft:"10px"}} 
-                                      to={`/view-movie/${movie.movieId}`}>View Movie
-                </Link>
               </td>
             </tr>
           ))}

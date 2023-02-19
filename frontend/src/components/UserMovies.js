@@ -9,6 +9,7 @@ const UserMovies = () => {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5)
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     getMovies();
@@ -35,12 +36,16 @@ const UserMovies = () => {
   
       FavouriteService.addFavourite(favourite).then((response) => {
         console.log(response);
-        alert("Movie added to Favourites");
-      }).catch(error => {
-        console.log(error);
-      });
+        setSuccessMessage('Movie added to Favourites');
+          setTimeout(() => {
+            setSuccessMessage('');
+          }, 1000); // 1 second delay
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
-      alert("Please log in first to add to favourites.");
+      alert('Please log in first to add to favourites.');
     }
   };  
 
@@ -52,6 +57,11 @@ const UserMovies = () => {
     <div className="container">
       <br />
       <h2 className="text-center">Movies</h2>
+      {successMessage && (
+        <div className="alert alert-success" role="alert">
+          {successMessage}
+        </div>
+      )}
       <table className="table table-bordered table-striped">
         <thead>
           <tr>

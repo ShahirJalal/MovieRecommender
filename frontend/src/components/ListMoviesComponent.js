@@ -9,6 +9,7 @@ const ListMovieComponent = () => {
       const [movie, setMovie] = useState([]);
       const [currentPage, setCurrentPage] = useState (1);
       const [postsPerPage, setPostsPerPage] = useState (5)
+      const [successMessage, setSuccessMessage] = useState('');
             useEffect(() => {
                 getMovies();
             }, [])
@@ -40,23 +41,30 @@ const ListMovieComponent = () => {
                 FavouriteService.addFavourite(favourite)
                   .then((response) => {
                     console.log(response);
-                    alert("Movie added to Favourites");
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
-              } else {
-                alert("Please log in first to add to favourites.");
-              }
-            };                          
-              
+                    setSuccessMessage('Movie added to Favourites');
+          setTimeout(() => {
+            setSuccessMessage('');
+          }, 1000); // 1 second delay
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert('Please log in first to add to favourites.');
+    }
+  };                                    
          const lastPostIndex = currentPage*postsPerPage;
         const firstPostIndex = lastPostIndex - postsPerPage;
         const curentPosts=movie.slice(firstPostIndex,lastPostIndex)
       return(
       <div className = "container">
         <br />
-           <h2 className = "text-center"> Movies </h2> 
+           <h2 className = "text-center"> Movies </h2>
+           {successMessage && (
+        <div className="alert alert-success" role="alert">
+          {successMessage}
+        </div>
+      )} 
            <Link to = "/add-Movie" className="btn btn-primary mb-2"> Add New Movie </Link>
            <table className="table table-bordered table-striped">
                 <thead>

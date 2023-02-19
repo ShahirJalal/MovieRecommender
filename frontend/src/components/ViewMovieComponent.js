@@ -12,6 +12,7 @@ const ViewMovieComponent = () => {
   const [rating, setRating] = useState(0);
   const { movieId } = useParams();
   const userId = localStorage.getItem('userId');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     MovieService.getMoviebyId(movieId).then((response) => {
@@ -51,18 +52,26 @@ const ViewMovieComponent = () => {
       FavouriteService.addFavourite(favourite)
         .then((response) => {
           console.log(response);
-          alert("Movie added to Favourites");
+          setSuccessMessage('Movie added to Favourites');
+          setTimeout(() => {
+            setSuccessMessage('');
+          }, 1000); // 1 second delay
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      alert("Please log in first to add to favourites.");
+      alert('Please log in first to add to favourites.');
     }
   };
 
   return (
     <div className="container my-5">
+      {successMessage && (
+        <div className="alert alert-success" role="alert">
+          {successMessage}
+        </div>
+      )}
       <div className="row">
         <div className="col-md-4">
           <MoviePoster movieId={movieId} className="img-fluid rounded" />
