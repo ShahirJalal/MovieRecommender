@@ -20,6 +20,7 @@ public class UserRepository {
     private final String INSERT_USER = "INSERT INTO demo_users (EMAIL, USERNAME, USERPASSWORD, ROLE) values (?, ?, ?, ?)";
     private final String UPDATE_USER = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ?, ROLE = ? WHERE USERID = ?";
     private final String DELETE_USER = "DELETE demo_users WHERE USERID = ?";
+    private final String GET_BY_USERNAME = "SELECT * FROM demo_users WHERE USERNAME = ?";
 
     private RowMapper<Users> rowMapper = (ResultSet rs, int rowNum) -> {
         Users use = new Users();
@@ -38,8 +39,6 @@ public class UserRepository {
     public Users getUserById(int userId) {
         return jdbcTemplate.queryForObject(GET_BY_ID, rowMapper, userId);
     }
-
-    private final String GET_BY_USERNAME = "SELECT * FROM demo_users WHERE USERNAME = ?";
 
     public Users getByUserName(String userName) {
         return jdbcTemplate.queryForObject(GET_BY_USERNAME, rowMapper, userName);
