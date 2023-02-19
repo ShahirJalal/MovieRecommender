@@ -31,12 +31,18 @@ const ViewMovieComponent = () => {
       movieId,
       rating
     };
-    RatingService.addRating(data).then((response) => {
-      alert(response.data);
-    }).catch(error => {
-      console.log(error);
-    });
-  };
+    RatingService.addRating(data)
+      .then(() => {
+        setSuccessMessage('Rating submitted successfully');
+        setRating(0); // Reset the rating value
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 1000); // Hide the success message after 1 second
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };  
 
   const addToFavourites = (movieId, title, genres) => {
     const userId = localStorage.getItem("userId");
