@@ -2,6 +2,22 @@ import React, { useState, useEffect } from 'react';
 import MovieService from '../services/MovieService';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (role === 'user') {
+      window.location.href = 'http://localhost:3000/user-home';
+      return null;
+    } else if (!role) {
+      window.location.href = 'http://localhost:3000';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const AddMovieComponent = () => {
   const [movieId, setMovieId] = useState('');
   const [title, setTitle] = useState('');
@@ -144,4 +160,4 @@ const AddMovieComponent = () => {
   );
 }
                 
-export default AddMovieComponent;
+export default withRoleCheck(AddMovieComponent);

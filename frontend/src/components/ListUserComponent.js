@@ -3,6 +3,22 @@ import UserService from '../services/UserService'
 import Pagination from './Pagination'
 import { Link } from 'react-router-dom'
 
+const withRoleCheck = (Component) => {
+    return () => {
+      const role = localStorage.getItem('role');
+  
+      if (role === 'user') {
+        window.location.href = 'http://localhost:3000/user-home';
+        return null;
+      } else if (!role) {
+        window.location.href = 'http://localhost:3000';
+        return null;
+      }
+  
+      return <Component />;
+    };
+};
+
 const ListUserComponent = () => {
       const [user, setUser] = useState([])
       const [currentPage, setCurrentPage] = useState (1);
@@ -73,4 +89,4 @@ const ListUserComponent = () => {
        </div>
                )
 }
-export default ListUserComponent
+export default withRoleCheck(ListUserComponent);
