@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { hashPassword } from './PasswordUtils';
+import { hashPassword } from "./PasswordUtils";
 
 const withRoleCheck = (Component) => {
   return () => {
-    const role = localStorage.getItem('role');
+    const role = localStorage.getItem("role");
 
-    if (role === 'admin') {
-      window.location.href = 'http://localhost:3000/admin-home';
+    if (role === "admin") {
+      window.location.href = "http://localhost:3000/admin-home";
       return null;
-    } else if (role === 'user') {
-      window.location.href = 'http://localhost:3000/user-home';
+    } else if (role === "user") {
+      window.location.href = "http://localhost:3000/user-home";
       return null;
     }
 
@@ -44,7 +44,7 @@ const Registration = () => {
           userPassword: hashedPassword,
           role: "user", // Set the role to "user"
         }
-      );      
+      );
       if (response.data) {
         setIsSuccessful(true);
         setErrorMessage("");

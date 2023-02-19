@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { hashPassword } from './PasswordUtils';
+import { hashPassword } from "./PasswordUtils";
 
 const withRoleCheck = (Component) => {
   return () => {
-    const role = localStorage.getItem('role');
+    const role = localStorage.getItem("role");
 
-    if (role === 'admin') {
-      window.location.href = 'http://localhost:3000/admin-home';
+    if (role === "admin") {
+      window.location.href = "http://localhost:3000/admin-home";
       return null;
-    } else if (role === 'user') {
-      window.location.href = 'http://localhost:3000/user-home';
+    } else if (role === "user") {
+      window.location.href = "http://localhost:3000/user-home";
       return null;
     }
 
@@ -27,10 +27,13 @@ const Login = () => {
     event.preventDefault();
     try {
       const hashedPassword = await hashPassword(password);
-      const response = await axios.post("http://localhost:8080/api/v1/users/login", {
-        userName: username,
-        userPassword: hashedPassword,
-      });
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/users/login",
+        {
+          userName: username,
+          userPassword: hashedPassword,
+        }
+      );
       if (response.data.role === "user") {
         localStorage.setItem("userId", response.data.userId);
         localStorage.setItem("userName", response.data.userName);

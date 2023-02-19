@@ -5,13 +5,13 @@ import { hashPassword } from "./PasswordUtils";
 
 const withRoleCheck = (Component) => {
   return () => {
-    const role = localStorage.getItem('role');
+    const role = localStorage.getItem("role");
 
-    if (role === 'user') {
-      window.location.href = 'http://localhost:3000/user-home';
+    if (role === "user") {
+      window.location.href = "http://localhost:3000/user-home";
       return null;
     } else if (!role) {
-      window.location.href = 'http://localhost:3000';
+      window.location.href = "http://localhost:3000";
       return null;
     }
 
@@ -28,14 +28,14 @@ const AddUserComponent = () => {
   const { userId } = useParams();
   const saveOrUpdateUser = (e) => {
     e.preventDefault();
-  
+
     const user = {
       userId,
       email,
       userName,
       role,
     };
-  
+
     if (userId) {
       UserService.getUserbyId(userId)
         .then((response) => {
@@ -68,7 +68,7 @@ const AddUserComponent = () => {
           console.log(error);
         });
     }
-  };  
+  };
 
   useEffect(() => {
     UserService.getUserbyId(userId)

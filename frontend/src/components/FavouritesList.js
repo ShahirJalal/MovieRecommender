@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import FavouriteService from '../services/FavouriteService';
-import MoviePoster from './MoviePosterSmall';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import FavouriteService from "../services/FavouriteService";
+import MoviePoster from "./MoviePosterSmall";
+import { Link } from "react-router-dom";
 
 const withRoleCheck = (Component) => {
   return () => {
-    const role = localStorage.getItem('role');
+    const role = localStorage.getItem("role");
 
     if (!role) {
-      window.location.href = 'http://localhost:3000';
+      window.location.href = "http://localhost:3000";
       return null;
     }
 
@@ -24,7 +24,7 @@ const FavouritesList = () => {
   }, []);
 
   const getFavourites = () => {
-    FavouriteService.getFavouriteById(localStorage.getItem('userId'))
+    FavouriteService.getFavouriteById(localStorage.getItem("userId"))
       .then((response) => {
         setFavourites(response.data);
       })
@@ -67,9 +67,9 @@ const FavouritesList = () => {
               <td>{favourite.title}</td>
               <td>{favourite.genres}</td>
               <td>
-              <Link
+                <Link
                   className="btn btn-primary"
-                  style={{ marginRight: '10px' }}
+                  style={{ marginRight: "10px" }}
                   to={`/view-movie/${favourite.movieId}`}
                 >
                   View Movie
@@ -82,7 +82,7 @@ const FavouritesList = () => {
                 </Link>
                 <button
                   className="btn btn-danger"
-                  style={{ marginLeft: '10px' }}
+                  style={{ marginLeft: "10px" }}
                   onClick={() => deleteFavourite(favourite.favouriteId)}
                 >
                   Delete

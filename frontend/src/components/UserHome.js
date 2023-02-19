@@ -1,15 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const withRoleCheck = (Component) => {
   return () => {
-    const role = localStorage.getItem('role');
+    const role = localStorage.getItem("role");
 
-    if (role === 'admin') {
-      window.location.href = 'http://localhost:3000/admin-home';
+    if (role === "admin") {
+      window.location.href = "http://localhost:3000/admin-home";
       return null;
     } else if (!role) {
-      window.location.href = 'http://localhost:3000';
+      window.location.href = "http://localhost:3000";
       return null;
     }
 

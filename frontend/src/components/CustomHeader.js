@@ -35,8 +35,13 @@ const CustomHeader = () => {
             </a>
           </div>
           {userName && (
-                <span className="nav-link" style={{ color: "#ceb700", marginRight: "10px" }}>{userName.charAt(0).toUpperCase() + userName.slice(1)}</span>
-              )}
+            <span
+              className="nav-link"
+              style={{ color: "#ceb700", marginRight: "10px" }}
+            >
+              {userName.charAt(0).toUpperCase() + userName.slice(1)}
+            </span>
+          )}
           <div className="collapse navbar-collapse">
             {role && (
               <ul className="navbar-nav ml-auto">

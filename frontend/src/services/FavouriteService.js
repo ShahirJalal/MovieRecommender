@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_URL = 'http://localhost:8080/api/v1/favourites/';
+const API_URL = "http://localhost:8080/api/v1/favourites/";
 
 class FavouriteService {
   getAll() {
-    return axios.get(API_URL + 'getAll');
+    return axios.get(API_URL + "getAll");
   }
 
   getFavouriteById(userId) {
@@ -12,7 +12,7 @@ class FavouriteService {
   }
 
   addFavourite(favourite) {
-    return axios.post(API_URL + 'addFavourite', favourite);
+    return axios.post(API_URL + "addFavourite", favourite);
   }
 
   deleteFavourite(favouriteId) {

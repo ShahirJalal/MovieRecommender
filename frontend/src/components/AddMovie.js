@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import MovieService from '../services/MovieService';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import MovieService from "../services/MovieService";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const withRoleCheck = (Component) => {
   return () => {
-    const role = localStorage.getItem('role');
+    const role = localStorage.getItem("role");
 
-    if (role === 'user') {
-      window.location.href = 'http://localhost:3000/user-home';
+    if (role === "user") {
+      window.location.href = "http://localhost:3000/user-home";
       return null;
     } else if (!role) {
-      window.location.href = 'http://localhost:3000';
+      window.location.href = "http://localhost:3000";
       return null;
     }
 
@@ -19,9 +19,9 @@ const withRoleCheck = (Component) => {
 };
 
 const AddMovieComponent = () => {
-  const [movieId, setMovieId] = useState('');
-  const [title, setTitle] = useState('');
-  const [genres, setGenres] = useState('');
+  const [movieId, setMovieId] = useState("");
+  const [title, setTitle] = useState("");
+  const [genres, setGenres] = useState("");
   const navigate = useNavigate();
   const { movieId: paramMovieId } = useParams();
 
@@ -30,14 +30,14 @@ const AddMovieComponent = () => {
     const formData = {
       movieId,
       title,
-      genres
+      genres,
     };
     console.log(formData);
     if (paramMovieId) {
       MovieService.updateMovie(paramMovieId, formData)
         .then((response) => {
           console.log(response.data);
-          navigate('/admin-movies');
+          navigate("/admin-movies");
         })
         .catch((error) => {
           console.log(error);
@@ -46,7 +46,7 @@ const AddMovieComponent = () => {
       MovieService.createMovie(formData)
         .then((response) => {
           console.log(response.data);
-          navigate('/admin-movies');
+          navigate("/admin-movies");
         })
         .catch((error) => {
           console.log(error);
@@ -86,7 +86,7 @@ const AddMovieComponent = () => {
             {pageTitle()}
             <div className="card-body">
               <form>
-                {(!paramMovieId) && (
+                {!paramMovieId && (
                   <div className="form-group mb-2">
                     <label className="form-label">Movie ID:</label>
                     <input
@@ -124,7 +124,7 @@ const AddMovieComponent = () => {
                 <button
                   className="btn btn-success"
                   onClick={(e) => saveOrUpdateMovie(e)}
-                  style={{ marginRight: '10px' }}
+                  style={{ marginRight: "10px" }}
                 >
                   Save Movie
                 </button>
@@ -138,6 +138,6 @@ const AddMovieComponent = () => {
       </div>
     </div>
   );
-}
-                
+};
+
 export default withRoleCheck(AddMovieComponent);

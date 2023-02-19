@@ -1,20 +1,20 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CustomFooter from './components/CustomFooter';
-import CustomHeader from './components/CustomHeader';
-import ListUserComponent from './components/UsersList';
-import ListMoviesComponent from './components/MoviesList';
-import AddUserComponent from './components/AddUser';
-import AddMovieComponent from './components/AddMovie';
-import RecommendComponent from './components/RecommendationsList';
-import Login from './components/Login';
-import Registration from './components/Registration';
-import UserHome from './components/UserHome';
-import UserMovies from './components/UserMovies';
-import AdminHome from './components/AdminHome';
-import FavouritesList from './components/FavouritesList';
-import ViewMovieComponent from './components/ViewMovie';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CustomFooter from "./components/CustomFooter";
+import CustomHeader from "./components/CustomHeader";
+import ListUserComponent from "./components/UsersList";
+import ListMoviesComponent from "./components/MoviesList";
+import AddUserComponent from "./components/AddUser";
+import AddMovieComponent from "./components/AddMovie";
+import RecommendComponent from "./components/RecommendationsList";
+import Login from "./components/Login";
+import Registration from "./components/Registration";
+import UserHome from "./components/UserHome";
+import UserMovies from "./components/UserMovies";
+import AdminHome from "./components/AdminHome";
+import FavouritesList from "./components/FavouritesList";
+import ViewMovieComponent from "./components/ViewMovie";
 
 function App() {
   return (
