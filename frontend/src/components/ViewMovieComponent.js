@@ -6,6 +6,7 @@ import RatingService from '../services/RatingService';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import FavouriteService from '../services/FavouriteService';
+import StarRatings from 'react-star-ratings';
 import MovieRating from './MovieRating';
 
 const ViewMovieComponent = () => {
@@ -22,10 +23,6 @@ const ViewMovieComponent = () => {
       console.log(error);
     });
   }, [movieId]);
-
-  const handleRatingChange = (event) => {
-    setRating(event.target.value);
-  };
 
   const handleRatingSubmit = (event) => {
     event.preventDefault();
@@ -83,23 +80,23 @@ const ViewMovieComponent = () => {
           <hr />
           <form onSubmit={handleRatingSubmit}>
             <div className="form-group">
-            <MovieRating movieId={movieId} /><br />
+              <MovieRating movieId={movieId} /><br />
               <label htmlFor="rating">Rate this movie:</label>
               <div className="rating">
-                <input type="radio" id="star1" name="rating" value="1" onChange={handleRatingChange} />
-                <label htmlFor="star1"></label>
-                <input type="radio" id="star2" name="rating" value="2" onChange={handleRatingChange} />
-                <label htmlFor="star2"></label>
-                <input type="radio" id="star3" name="rating" value="3" onChange={handleRatingChange} />
-                <label htmlFor="star3"></label>
-                <input type="radio" id="star4" name="rating" value="4" onChange={handleRatingChange} />
-                <label htmlFor="star4"></label>
-                <input type="radio" id="star5" name="rating" value="5" onChange={handleRatingChange} />
-                <label htmlFor="star5"></label>
-              </div>
+                <StarRatings
+                  rating={rating}
+                  starRatedColor="orange"
+                  starHoverColor="orange"
+                  starDimension="25px"
+                  starSpacing="5px"
+                  changeRating={setRating}
+                  numberOfStars={5}
+                  name="rating"
+                />
+              </div><br />
             </div>
             <button type="submit" className="btn btn-warning">Submit Rating</button>
-          </form>
+          </form><br />
           <MovieOverview movieId={movieId} />
           <Link className='btn btn-success' to={`/recommendations/${movie.movieId}`}>Recommendation</Link>
           <button className='btn btn-primary' 
@@ -110,7 +107,7 @@ const ViewMovieComponent = () => {
         </div>
       </div>
     </div>
-  );
+  );  
 };
 
 export default ViewMovieComponent;
