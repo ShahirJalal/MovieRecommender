@@ -3,6 +3,22 @@ import UserService from "../services/UserService";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { hashPassword } from "./passwordUtils";
 
+const withRoleCheck = (Component) => {
+  return () => {
+    const role = localStorage.getItem('role');
+
+    if (role === 'user') {
+      window.location.href = 'http://localhost:3000/user-home';
+      return null;
+    } else if (!role) {
+      window.location.href = 'http://localhost:3000';
+      return null;
+    }
+
+    return <Component />;
+  };
+};
+
 const AddUserComponent = () => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
@@ -148,4 +164,4 @@ const AddUserComponent = () => {
   );
 };
 
-export default AddUserComponent;
+export default withRoleCheck(AddUserComponent);
