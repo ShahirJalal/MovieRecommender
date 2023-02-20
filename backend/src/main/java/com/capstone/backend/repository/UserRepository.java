@@ -15,13 +15,7 @@ public class UserRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    private final String GET_ALL = "SELECT * FROM demo_users ORDER BY userId";
-    private final String GET_BY_ID = "SELECT * FROM demo_users WHERE USERID = ?";
-    private final String INSERT_USER = "INSERT INTO demo_users (EMAIL, USERNAME, USERPASSWORD, ROLE) values (?, ?, ?, ?)";
-    private final String UPDATE_USER = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ?, ROLE = ? WHERE USERID = ?";
-    private final String DELETE_USER = "DELETE demo_users WHERE USERID = ?";
-    private final String GET_BY_USERNAME = "SELECT * FROM demo_users WHERE USERNAME = ?";
-
+    // Map SQL Queries to Users objects
     private RowMapper<Users> rowMapper = (ResultSet rs, int rowNum) -> {
         Users use = new Users();
         use.setUserId(rs.getInt(1));
@@ -32,19 +26,26 @@ public class UserRepository {
         return use;
     };
 
+    // Get all users
+    private final String GET_ALL = "SELECT * FROM demo_users ORDER BY USERID";
     public List<Users> findAll() {
         return jdbcTemplate.query(GET_ALL, rowMapper);
     }
 
+    // Get user with userId
+    private final String GET_BY_ID = "SELECT * FROM demo_users WHERE USERID = ?";
     public Users getUserById(int userId) {
         return jdbcTemplate.queryForObject(GET_BY_ID, rowMapper, userId);
     }
 
+    // Get user with userName
+    private final String GET_BY_USERNAME = "SELECT * FROM demo_users WHERE USERNAME = ?";
     public Users getByUserName(String userName) {
         return jdbcTemplate.queryForObject(GET_BY_USERNAME, rowMapper, userName);
     }
 
-
+    // Add new user
+    private final String INSERT_USER = "INSERT INTO demo_users (EMAIL, USERNAME, USERPASSWORD, ROLE) values (?, ?, ?, ?)";
     public boolean addUser(Users u) {
         if (jdbcTemplate.update(INSERT_USER, u.getEmail(), u.getUserName(), u.getUserPassword(), u.getRole()) > 0)
             return true;
@@ -52,6 +53,8 @@ public class UserRepository {
             return false;
     }
 
+    // Update existing user
+    private final String UPDATE_USER = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ?, ROLE = ? WHERE USERID = ?";
     public boolean updateUser(int userId, Users u) {
         if (jdbcTemplate.update(UPDATE_USER, u.getEmail(), u.getUserName(), u.getUserPassword(), u.getRole(), u.getUserId()) > 0)
             return true;
@@ -59,6 +62,8 @@ public class UserRepository {
             return false;
     }
 
+    // Delete user by userId
+    private final String DELETE_USER = "DELETE demo_users WHERE USERID = ?";
     public boolean deleteUser(int userId) {
         if (jdbcTemplate.update(DELETE_USER, userId) > 0)
             return true;
@@ -66,6 +71,7 @@ public class UserRepository {
             return false;
     }
 
+    // Register new user
     private String InsertQuery="INSERT INTO demo_users (email, userName, userPassword, role) VALUES (?, ?, ?, ?)";
     public boolean register(Users user) {
         return jdbcTemplate.update(InsertQuery, user.getEmail(),user.getUserName(), user.getUserPassword(), user.getRole()) > 0;
