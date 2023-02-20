@@ -13,6 +13,7 @@ public class FavouriteService {
     @Autowired
     private FavouriteRepository favouriteRepository;
 
+    // Add favourite movie
     public String addFavourite(Favourites favourite) {
         String response;
 
@@ -23,14 +24,17 @@ public class FavouriteService {
         return response;
     }
 
+    // Get all favourite movies
     public List<Favourites> getAll() {
         return favouriteRepository.getAll();
     }
 
+    // Get all favourite movies for a userId
     public List<Favourites> getFavouriteById(int userId) {
         return favouriteRepository.getFavouriteById(userId);
     }
 
+    // Delete a favourite movie
     public String deleteFavourite(int favouriteId) {
         String response;
 
