@@ -45,7 +45,7 @@ public class UserRepository {
     }
 
     // Add new user
-    private final String INSERT_USER = "INSERT INTO demo_users (EMAIL, USERNAME, USERPASSWORD, ROLE) values (?, ?, ?, ?)";
+    private final String INSERT_USER = "INSERT INTO demo_users (EMAIL, USERNAME, USERPASSWORD, ROLE) VALUES (?, ?, ?, ?)";
     public boolean addUser(Users u) {
         if (jdbcTemplate.update(INSERT_USER, u.getEmail(), u.getUserName(), u.getUserPassword(), u.getRole()) > 0)
             return true;
@@ -54,7 +54,7 @@ public class UserRepository {
     }
 
     // Update existing user
-    private final String UPDATE_USER = "UPDATE demo_users set EMAIL = ?, USERNAME = ?, USERPASSWORD = ?, ROLE = ? WHERE USERID = ?";
+    private final String UPDATE_USER = "UPDATE demo_users SET EMAIL = ?, USERNAME = ?, USERPASSWORD = ?, ROLE = ? WHERE USERID = ?";
     public boolean updateUser(int userId, Users u) {
         if (jdbcTemplate.update(UPDATE_USER, u.getEmail(), u.getUserName(), u.getUserPassword(), u.getRole(), u.getUserId()) > 0)
             return true;
@@ -72,7 +72,7 @@ public class UserRepository {
     }
 
     // Register new user
-    private String InsertQuery="INSERT INTO demo_users (email, userName, userPassword, role) VALUES (?, ?, ?, ?)";
+    private String InsertQuery="INSERT INTO demo_users (EMAIL, USERNAME, USERPASSWORD, ROLE) VALUES (?, ?, ?, ?)";
     public boolean register(Users user) {
         return jdbcTemplate.update(InsertQuery, user.getEmail(),user.getUserName(), user.getUserPassword(), user.getRole()) > 0;
     }
