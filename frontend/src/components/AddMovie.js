@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieService from "../services/MovieService";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -25,6 +26,7 @@ const AddMovieComponent = () => {
   const navigate = useNavigate();
   const { movieId: paramMovieId } = useParams();
 
+  // Create a new movie or update an existing one
   const saveOrUpdateMovie = (e) => {
     e.preventDefault();
     const formData = {
@@ -54,6 +56,7 @@ const AddMovieComponent = () => {
     }
   };
 
+  // Fetch data and pre-fill the form in update movie
   useEffect(() => {
     if (paramMovieId) {
       MovieService.getMoviebyId(paramMovieId)
@@ -69,6 +72,7 @@ const AddMovieComponent = () => {
     }
   }, [paramMovieId]);
 
+  // Determines the page title
   const pageTitle = () => {
     if (paramMovieId) {
       return <h2 className="text-center">Update Movie</h2>;

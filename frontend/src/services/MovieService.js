@@ -11,7 +11,7 @@ class MovieService {
 
   // Create a new movie
   createMovie(movie) {
-    return axios.post(MOVIE_BASE_REST_API_URL + "/addMovie", movie); d
+    return axios.post(MOVIE_BASE_REST_API_URL + "/addMovie", movie);
   }
 
   // Get a movie by movieId

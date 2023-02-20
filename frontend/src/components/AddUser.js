@@ -3,6 +3,7 @@ import UserService from "../services/UserService";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { hashPassword } from "./PasswordUtils";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -26,6 +27,8 @@ const AddUserComponent = () => {
   const [role, setRole] = useState("");
   const navigate = useNavigate();
   const { userId } = useParams();
+
+  // Create a new user or update an existing one
   const saveOrUpdateUser = (e) => {
     e.preventDefault();
 
