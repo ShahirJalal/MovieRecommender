@@ -5,6 +5,7 @@ import MoviePoster from "./MoviePosterSmall";
 import { Link } from "react-router-dom";
 import FavouriteService from "../services/FavouriteService";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -31,6 +32,7 @@ const UserMovies = () => {
     getMovies();
   }, []);
 
+  // Fetch movie
   const getMovies = () => {
     MovieService.getAllMovies()
       .then((response) => {
@@ -42,6 +44,7 @@ const UserMovies = () => {
       });
   };
 
+  // Add movie to favourites by userId
   const addToFavourites = (movieId, title, genres) => {
     const userId = localStorage.getItem("userId");
     if (userId) {
@@ -68,6 +71,7 @@ const UserMovies = () => {
     }
   };
 
+  // Index range of movies to be displayed
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = movies.slice(firstPostIndex, lastPostIndex);
