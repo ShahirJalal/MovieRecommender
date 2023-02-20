@@ -3,6 +3,7 @@ import UserService from "../services/UserService";
 import Pagination from "./Pagination";
 import { Link } from "react-router-dom";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -26,6 +27,8 @@ const ListUserComponent = () => {
   useEffect(() => {
     getUsers();
   }, []);
+
+  // Get all users
   const getUsers = () => {
     UserService.getAllUsers()
       .then((response) => {
@@ -36,6 +39,8 @@ const ListUserComponent = () => {
         console.log(error);
       });
   };
+
+  // Delete user by userId
   const deleteUser = (userId) => {
     UserService.deleteUser(userId)
       .then((response) => {
@@ -45,6 +50,8 @@ const ListUserComponent = () => {
         console.log(error);
       });
   };
+
+  // Index range of users to be displayed
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const curentPosts = user.slice(firstPostIndex, lastPostIndex);
@@ -76,7 +83,7 @@ const ListUserComponent = () => {
               <td>{user.userPassword}</td>
               <td>{user.role}</td>
               <td>
-                <Link className="btn btn-info" to={`/edit-user/${user.userId}`}>
+                <Link className="btn btn-info" to={`/edit-user/${user.userId}`}> {/* Update user */}
                   Update
                 </Link>
                 <button
