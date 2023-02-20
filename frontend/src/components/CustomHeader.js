@@ -10,6 +10,7 @@ const CustomHeader = () => {
     setUserName(localStorage.getItem("userName"));
   }, []);
 
+  // Clears local storage and redirects user to login page
   const handleLogout = () => {
     localStorage.clear();
     setTimeout(() => {
@@ -39,13 +40,13 @@ const CustomHeader = () => {
               className="nav-link"
               style={{ color: "#ceb700", marginRight: "10px" }}
             >
-              {userName.charAt(0).toUpperCase() + userName.slice(1)}
+              {userName.charAt(0).toUpperCase() + userName.slice(1)} {/* Displays username on the header */}
             </span>
           )}
           <div className="collapse navbar-collapse">
             {role && (
               <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
+                <li className="nav-item"> {/* Sends users to approriate home page based on their role */}
                   {role === "user" ? (
                     <Link to="/user-home" className="nav-link">
                       Home
