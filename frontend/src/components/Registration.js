@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { hashPassword } from "./PasswordUtils";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -29,13 +30,15 @@ const Registration = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Check passwords similarity
     if (userPassword !== confirmPassword) {
       setErrorMessage("Passwords do not match");
       setIsSuccessful(false);
       return;
     }
     try {
-      const hashedPassword = await hashPassword(userPassword);
+      const hashedPassword = await hashPassword(userPassword); // Hash the password
       const response = await axios.post(
         "http://localhost:8080/api/v1/users/register",
         {
@@ -45,6 +48,8 @@ const Registration = () => {
           role: "user", // Set the role to "user"
         }
       );
+
+      // Redirects user to login page upon successful registration
       if (response.data) {
         setIsSuccessful(true);
         setErrorMessage("");
