@@ -3,10 +3,12 @@ import axios from "axios";
 import MovieService from "../services/MovieService";
 import React from "react";
 
+// Display movie poster by movieId
 const useMoviePoster = (movieId) => {
   const [posterPath, setPosterPath] = useState("");
   const [tmdbId, setTmdbId] = useState("");
 
+  // Get tmdbId by movieId
   useEffect(() => {
     MovieService.getLinksFromMovie(movieId)
       .then((response) => {
@@ -17,6 +19,7 @@ const useMoviePoster = (movieId) => {
       });
   }, []);
 
+  // Get poster path using TMDB API
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
@@ -27,6 +30,7 @@ const useMoviePoster = (movieId) => {
     fetchData();
   }, [tmdbId]);
 
+  // Movie poster component
   return (
     <img
       alt=""
