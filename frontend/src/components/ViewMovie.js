@@ -9,6 +9,7 @@ import FavouriteService from "../services/FavouriteService";
 import StarRatings from "react-star-ratings";
 import MovieRating from "./MovieRating";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -29,6 +30,7 @@ const ViewMovieComponent = () => {
   const userId = localStorage.getItem("userId");
   const [successMessage, setSuccessMessage] = useState("");
 
+  // Fetch movie by movieId
   useEffect(() => {
     MovieService.getMoviebyId(movieId)
       .then((response) => {
@@ -39,6 +41,7 @@ const ViewMovieComponent = () => {
       });
   }, [movieId]);
 
+  // Submits rating
   const handleRatingSubmit = (event) => {
     event.preventDefault();
     const data = {
@@ -59,6 +62,7 @@ const ViewMovieComponent = () => {
       });
   };
 
+  // Add movie to favourites
   const addToFavourites = (movieId, title, genres) => {
     const userId = localStorage.getItem("userId");
     if (userId) {
