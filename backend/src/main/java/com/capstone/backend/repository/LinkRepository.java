@@ -12,6 +12,7 @@ public class LinkRepository {
     @Autowired
     private JdbcOperations jdbcTemplate;
 
+    // Maps result to Links object
     private RowMapper<Links> rowMapper=(ResultSet rs, int row)->{
         Links movie=new Links();
         movie.setMovieId(rs.getInt(1));
@@ -19,9 +20,10 @@ public class LinkRepository {
         movie.setTmdbId(rs.getInt(3));
         return movie;
     };
+
+    // get Links for a movieId
     public Links findLinkByMovieId(int id){
         return jdbcTemplate.queryForObject("SELECT * FROM LINKS WHERE movieId = ?", new Object[]{id}, rowMapper);
     }
-
 
 }

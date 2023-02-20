@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1/links")
+@RequestMapping("/api/v1/links") // URL path
 public class LinkController {
 
     @Autowired(required = true)
     private LinkService Service;
 
+    // get Links for a movieId
     @PostMapping("/{id}")
     public Links getLinkByMovieId(@PathVariable int id) throws Exception {
         return Service.getLinkByMovieId(id);

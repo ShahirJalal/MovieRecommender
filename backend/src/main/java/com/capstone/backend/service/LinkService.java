@@ -10,7 +10,7 @@ public class LinkService {
     @Autowired
     private LinkRepository linkRepository;
 
-
+    // get Links for a movieId
     public Links getLinkByMovieId(int id)
     {
         return linkRepository.findLinkByMovieId(id);

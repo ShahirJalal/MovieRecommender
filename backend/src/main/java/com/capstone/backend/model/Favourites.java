@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Favourites {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment column
     @Column(name = "favouriteid")
     private int favouriteId;
     @Column(name = "movieid")
