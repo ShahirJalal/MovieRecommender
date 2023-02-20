@@ -3,6 +3,7 @@ import axios from "axios";
 import MovieService from "../services/MovieService";
 import React from "react";
 
+// Display movie description by movieId
 const useMovieOverview = (movieId) => {
   const [overview, setOverview] = useState("");
   const [tmdbId, setTmdbId] = useState("");
