@@ -5,6 +5,7 @@ import MoviePoster from "./MoviePosterSmall";
 import FavouriteService from "../services/FavouriteService";
 import { Link } from "react-router-dom";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -23,6 +24,7 @@ const RecommendComponent = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const { movieId } = useParams();
 
+  // Fetch similar movies by movieId
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
@@ -33,6 +35,7 @@ const RecommendComponent = () => {
     fetchData();
   }, [movieId]);
 
+  // Add movie to favourites by userId
   const addToFavourites = (movieId, title, genres) => {
     const userId = localStorage.getItem("userId");
     if (userId) {
