@@ -1,5 +1,6 @@
 import React from "react";
 
+// Web page footer section
 const CustomFooter = () => {
   return (
     <div style={{ paddingBottom: "80px" }}>
