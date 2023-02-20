@@ -16,13 +16,13 @@ public  class MovieRepository {
     @Autowired
     private JdbcOperations jdbcTemplate;
 
-    private String RateMovie = "INSERT INTO ratings (userId, movieId, rating, timeStamp) VALUES (?, ?, ?, ?)";
-
+    // JDBC_DRIVER, DB_URL, USER, PASS for connecting to Oracle DB
     final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
     final String DB_URL = "jdbc:oracle:thin:@database-2.cmxecweo1rn2.ap-southeast-1.rds.amazonaws.com:1521:ORCL";
     final String USER = "admin";
     final String PASS = "Password123";
 
+    // Maps data from database to Movies object
     private RowMapper<Movies> rowMapper=(ResultSet rs, int row)->{
         Movies movie=new Movies();
         movie.setMovieId(rs.getInt(1));
@@ -31,22 +31,23 @@ public  class MovieRepository {
         return movie;
     };
 
-    public List<Movies> findAll(){
-        return jdbcTemplate.query("SELECT * FROM demo_movies ORDER BY movieId DESC FETCH NEXT 100 ROWS ONLY",rowMapper);
-    }
-
+    // Add new movie
     public boolean addMovie(Movies movie) {
         String InsertQuery = "INSERT INTO demo_movies (movieId, title, genres) VALUES (?, ?, ?)";
         return jdbcTemplate.update(InsertQuery,movie.getMovieId(), movie.getTitle(), movie.getGenres()) > 0;
     }
 
-    private String UpdateQuery = "UPDATE  demo_movies SET title = ?, genres = ? WHERE movieId = ?";
-    public boolean updateMovie(int movieId,Movies movie){
-        return jdbcTemplate.update(UpdateQuery, movie.getTitle(), movie.getGenres(),movieId) > 0;
+    // Get all movies
+    public List<Movies> findAll(){
+        return jdbcTemplate.query("SELECT * FROM demo_movies ORDER BY movieId DESC FETCH NEXT 100 ROWS ONLY",rowMapper);
     }
+
+    // Get movie by movieId
     public Movies getMovieById(int movieId){
         return jdbcTemplate.queryForObject("SELECT * FROM demo_movies WHERE movieId = ?", new Object[]{movieId}, rowMapper);
     }
+
+    // Get filtered movie by movieId
     public Movies getFilteredMovieById(int movieId){
         try {
             System.out.println();
@@ -56,6 +57,13 @@ public  class MovieRepository {
         }
     }
 
+    // Update existing movie
+    private String UpdateQuery = "UPDATE  demo_movies SET title = ?, genres = ? WHERE movieId = ?";
+    public boolean updateMovie(int movieId,Movies movie){
+        return jdbcTemplate.update(UpdateQuery, movie.getTitle(), movie.getGenres(),movieId) > 0;
+    }
+
+    // Delete movie by movieId
     private String DeleteQuery = "DELETE demo_movies WHERE movieId = ?";
     public boolean deleteMovie(int movieId) {
         if (jdbcTemplate.update(DeleteQuery, movieId) > 0)
@@ -64,6 +72,7 @@ public  class MovieRepository {
             return false;
     }
 
+    // Run SQL query and return a list of results
     public List<String> runQuery(String myQuery, String myColumn){
         Connection conn = null;
         Statement stmt = null;
@@ -103,6 +112,7 @@ public  class MovieRepository {
         return result;
     }
 
+    // Get all similar movies to the movieId
     public List<Movies> getSimilarMovies(int id) {
         try {
             List<String> similarIDs = new ArrayList<>(); //SIMILAR LIST ID
@@ -115,13 +125,11 @@ public  class MovieRepository {
             for (int j = 0; j < similarIDs.size(); j++) {
                 Movies movie=getFilteredMovieById(Integer.valueOf(similarIDs.get(j)));
                 if (movie == null) {
-//                    System.out.println("movie null: " + movie.getTitle());
                     continue;
                 } else {
                     System.out.println("movie found: " + movie.getMovieId());
                     similarMovies.add(movie);
                 }
-//                similarMovies.add(movie);
             }
             System.out.println("return size: " + similarMovies.size());
             return similarMovies;

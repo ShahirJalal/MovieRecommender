@@ -12,31 +12,7 @@ public class MovieService {
     @Autowired
     MovieRepository movieRepository;
 
-    private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://localhost/MoviesDB";
-    private final String USER = "user";
-    private final String PASS = "password";
-
-    public List<Movies> getAll() {
-        return movieRepository.findAll();
-    }
-
-    public Movies getMovieById(int movieId) {
-        return movieRepository.getMovieById(movieId);
-    }
-
-    public Movies getFilteredMovieById(int movieId) {
-        return movieRepository.getFilteredMovieById(movieId);
-    }
-
-    public List<String> runQuery(String myQuery, String myColumn){
-        return movieRepository.runQuery(myQuery, myColumn);
-    }
-
-    public List<Movies> getSimilarMovies(int movieId) {
-        return movieRepository.getSimilarMovies(movieId);
-    }
-
+    // Add new movie
     public String addMovie(Movies mov) {
         String response;
 
@@ -48,6 +24,27 @@ public class MovieService {
         return response;
     }
 
+    // Get all movies
+    public List<Movies> getAll() {
+        return movieRepository.findAll();
+    }
+
+    // get movie by movieId
+    public Movies getMovieById(int movieId) {
+        return movieRepository.getMovieById(movieId);
+    }
+
+    // Get filtered movie by movieId
+    public Movies getFilteredMovieById(int movieId) {
+        return movieRepository.getFilteredMovieById(movieId);
+    }
+
+    // Get all similar movies to the movieId
+    public List<Movies> getSimilarMovies(int movieId) {
+        return movieRepository.getSimilarMovies(movieId);
+    }
+
+    // Update existing movie
     public String updateMovie(int movieId, Movies mov) {
         String response;
 
@@ -58,6 +55,7 @@ public class MovieService {
         return response;
     }
 
+    // Delete movie by movieId
     public String deleteMovie(int movieId) {
         String response;
 
@@ -66,6 +64,11 @@ public class MovieService {
         else
             response = "Something went wrong. Not deleted, please try again";
         return response;
+    }
+
+    // Run SQL query and return a list of results
+    public List<String> runQuery(String myQuery, String myColumn){
+        return movieRepository.runQuery(myQuery, myColumn);
     }
 
 }
