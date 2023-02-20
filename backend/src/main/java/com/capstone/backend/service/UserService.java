@@ -14,18 +14,22 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    // Get all users
     public List<Users> getAll() {
         return userRepository.findAll();
     }
 
+    // Get user with userId
     public Users getUserById(int userId) {
         return userRepository.getUserById(userId);
     }
 
+    // Get user with userName
     public Users getByUserName(String userName) {
         return userRepository.getByUserName(userName);
     }
 
+    // Add new user
     public String addUser(Users use) {
         String response;
 
@@ -36,6 +40,7 @@ public class UserService {
         return response;
     }
 
+    // Update existing user
     public String updateUser(int userId, Users use) {
         String response;
 
@@ -46,6 +51,7 @@ public class UserService {
         return response;
     }
 
+    // Delete user by userId
     public String deleteUser(int userId) {
         String response;
 
@@ -56,6 +62,7 @@ public class UserService {
         return response;
     }
 
+    // Verifies user login
     public ResponseEntity<?> login(Users user) {
         Users userdata = userRepository.getByUserName (user.getUserName()); //VERIFY IS USER EXISTS
         if(userdata != null)
@@ -75,6 +82,7 @@ public class UserService {
         }
     }
 
+    // Register new user
     public boolean register(Users user) {
         return userRepository.register(user);
     }
