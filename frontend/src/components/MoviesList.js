@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import MoviePoster from "./MoviePosterSmall";
 import FavouriteService from "../services/FavouriteService";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -27,8 +28,10 @@ const ListMovieComponent = () => {
   const postsPerPage = 5;
   const [successMessage, setSuccessMessage] = useState("");
   useEffect(() => {
-    getMovies();
+    getMovies(); 
   }, []);
+  
+  // Fetch movie
   const getMovies = () => {
     MovieService.getAllMovies()
       .then((response) => {
@@ -39,6 +42,8 @@ const ListMovieComponent = () => {
         console.log(error);
       });
   };
+
+  // Delete movie
   const deleteMovie = (movieId) => {
     MovieService.deleteMovie(movieId)
       .then((response) => {
@@ -49,6 +54,7 @@ const ListMovieComponent = () => {
       });
   };
 
+  // Add movie to favourites by userId
   const addToFavourites = (movieId, title, genres) => {
     const userId = localStorage.getItem("userId");
     if (userId) {
@@ -73,6 +79,8 @@ const ListMovieComponent = () => {
       alert("Please log in first to add to favourites.");
     }
   };
+
+  // Index range of movies to be displayed
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const curentPosts = movie.slice(firstPostIndex, lastPostIndex);
