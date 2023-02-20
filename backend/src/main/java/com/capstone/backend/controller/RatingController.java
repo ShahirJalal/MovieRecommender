@@ -8,12 +8,13 @@ import com.capstone.backend.service.RatingService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1/ratings")
+@RequestMapping("/api/v1/ratings") // URL path
 public class RatingController {
 
     @Autowired(required = true)
     private RatingService ratingService;
 
+    // Add movie rating
     @PostMapping("/addRating")
     public String addRating(@RequestBody Ratings rating) {
         return ratingService.addRating(rating);

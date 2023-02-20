@@ -12,6 +12,7 @@ public class RatingService {
     @Autowired
     private RatingRepository ratingRepository;
 
+    // Add movie rating
     public String addRating(Ratings rating) {
         String response;
 

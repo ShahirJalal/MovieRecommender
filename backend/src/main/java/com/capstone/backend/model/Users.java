@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment column
     @Column(name = "userid")
     private int userId;
     @Column(name = "email")
