@@ -40,7 +40,7 @@ const AddUserComponent = () => {
     };
 
     if (userId) {
-      UserService.getUserbyId(userId)
+      UserService.getUserbyId(userId) // Update existing user
         .then((response) => {
           const { userPassword: oldPassword } = response.data;
           if (oldPassword === userPassword) {
@@ -59,7 +59,7 @@ const AddUserComponent = () => {
         .catch((error) => {
           console.log(error);
         });
-    } else {
+    } else { // Create new user
       const hashedPassword = hashPassword(userPassword); // hash the password
       user.userPassword = hashedPassword;
       UserService.createUser(user)
@@ -73,6 +73,7 @@ const AddUserComponent = () => {
     }
   };
 
+  // Fetch data and pre-fill the form
   useEffect(() => {
     UserService.getUserbyId(userId)
       .then((response) => {
@@ -87,6 +88,7 @@ const AddUserComponent = () => {
       });
   }, []);
 
+  // Determines the page title
   const title = () => {
     if (userId) {
       return <h2 className="text-center"> Update User</h2>;

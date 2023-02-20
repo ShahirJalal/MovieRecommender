@@ -35,7 +35,7 @@ const AddMovieComponent = () => {
       genres,
     };
     console.log(formData);
-    if (paramMovieId) {
+    if (paramMovieId) { // Update existing movie
       MovieService.updateMovie(paramMovieId, formData)
         .then((response) => {
           console.log(response.data);
@@ -44,7 +44,7 @@ const AddMovieComponent = () => {
         .catch((error) => {
           console.log(error);
         });
-    } else {
+    } else { // Create a new movie
       MovieService.createMovie(formData)
         .then((response) => {
           console.log(response.data);
