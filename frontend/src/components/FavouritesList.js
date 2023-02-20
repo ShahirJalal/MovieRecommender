@@ -3,6 +3,7 @@ import FavouriteService from "../services/FavouriteService";
 import MoviePoster from "./MoviePosterSmall";
 import { Link } from "react-router-dom";
 
+// check user's role
 const withRoleCheck = (Component) => {
   return () => {
     const role = localStorage.getItem("role");
@@ -23,6 +24,7 @@ const FavouritesList = () => {
     getFavourites();
   }, []);
 
+  // Fetch a list of favourite movies
   const getFavourites = () => {
     FavouriteService.getFavouriteById(localStorage.getItem("userId"))
       .then((response) => {
@@ -33,6 +35,7 @@ const FavouritesList = () => {
       });
   };
 
+  // Remove favourite movie
   const deleteFavourite = (favouriteId) => {
     FavouriteService.deleteFavourite(favouriteId)
       .then((response) => {
