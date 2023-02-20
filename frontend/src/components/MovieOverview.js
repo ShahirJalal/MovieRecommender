@@ -7,6 +7,7 @@ const useMovieOverview = (movieId) => {
   const [overview, setOverview] = useState("");
   const [tmdbId, setTmdbId] = useState("");
 
+  // Get tmdbId by movieId
   useEffect(() => {
     MovieService.getLinksFromMovie(movieId)
       .then((response) => {
@@ -17,6 +18,7 @@ const useMovieOverview = (movieId) => {
       });
   }, []);
 
+  // Get movie overview using TMDB API
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
@@ -27,7 +29,7 @@ const useMovieOverview = (movieId) => {
     fetchData();
   }, [tmdbId]);
 
-  return <label className="form-label"> Description: {overview}</label>;
+  return <label className="form-label"> Description: {overview}</label>; // Movie description component
 };
 
 const MovieOverview = ({ movieId }) => {
