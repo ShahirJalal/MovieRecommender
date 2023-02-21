@@ -1,12 +1,12 @@
---DROP TABLE demo_ratings;
+--SELECT * FROM demo_favourites;
 
---CREATE TABLE demo_ratings
---AS
---SELECT *
---FROM ratings;
+--SELECT * FROM demo_movies;
 
---ALTER TABLE demo_ratings
---DROP COLUMN timestamp;
+--SELECT * FROM demo_ratings;
+
+--SELECT * FROM demo_users;
+
+--SELECT * FROM links;
 
 --SELECT * FROM demo_ratings
 --WHERE userId = 30 AND movieId = 152081;
