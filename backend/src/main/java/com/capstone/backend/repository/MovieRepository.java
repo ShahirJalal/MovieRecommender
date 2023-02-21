@@ -82,10 +82,10 @@ public  class MovieRepository {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
 
-            String sql = myQuery;
-            ResultSet rs = stmt.executeQuery(sql);
+            String sql = myQuery; // Create a statement object for executing SQL queries
+            ResultSet rs = stmt.executeQuery(sql); // Execute the given query
 
-            while(rs.next()){
+            while(rs.next()){ // Loops through the ResultSet and adds the value of the specified column to a list
                 result.add(rs.getString(myColumn));
             }
             rs.close();
@@ -109,20 +109,20 @@ public  class MovieRepository {
             }
         }
 
-        return result;
+        return result; // Returns the list of column values
     }
 
     // Get all similar movies to the movieId
     public List<Movies> getSimilarMovies(int id) {
         try {
-            List<String> similarIDs = new ArrayList<>(); //SIMILAR LIST ID
+            List<String> similarIDs = new ArrayList<>(); // Similar List ID
             List<Movies> similarMovies = new ArrayList<>();
-            String query = "Select movie_id from pearsons_correlation_medium where ID_" + id + "> 0.5";//QUERY TO GET SIMILAR IDs
+            String query = "Select movie_id from pearsons_correlation_medium where ID_" + id + "> 0.5";// Query to get similar IDs
             System.out.println("Query made: " + query);
-            similarIDs = runQuery(query, "movie_id");
+            similarIDs = runQuery(query, "movie_id"); // Runs the query using a helper method named "runQuery" and stores the resulting list of similar IDs
             System.out.println("Similar IDs: " + similarIDs);
             System.out.println("Number of movies found: " + similarIDs.size());
-            for (int j = 0; j < similarIDs.size(); j++) {
+            for (int j = 0; j < similarIDs.size(); j++) { // Loops through the list of similar movie IDs, retrieving the corresponding movie object from the "movies" table using a helper method named "getFilteredMovieById"
                 Movies movie=getFilteredMovieById(Integer.valueOf(similarIDs.get(j)));
                 if (movie == null) {
                     continue;

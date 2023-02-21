@@ -29,7 +29,7 @@ class MovieService {
     return axios.delete(MOVIE_BASE_REST_API_URL + "/deleteMovie/" + movieId);
   }
 
-  // Get links for a movie by movieId
+  // Get tmdbId for a movie by movieId
   getLinksFromMovie(movieId) {
     return axios.post("http://localhost:8080/api/v1/links/" + movieId);
   }
